@@ -1668,17 +1668,19 @@ local function stopInvisDesync()
             invisDesyncLoop:Disconnect()
             invisDesyncLoop = nil
         end
-        local myChar = localPlayer.Character
-        if myChar and myChar:FindFirstChild("HumanoidRootPart") and invisDesyncOriginalPos then
-            myChar.HumanoidRootPart.CFrame = invisDesyncOriginalPos
-            local hum = myChar:FindFirstChild("Humanoid")
-            if hum then
-                hum.PlatformStand = false
-                hum.AutoRotate = true
+        if invisDesyncOriginalPos then
+            local myChar = localPlayer.Character
+            if myChar and myChar:FindFirstChild("HumanoidRootPart") then
+                myChar.HumanoidRootPart.CFrame = invisDesyncOriginalPos
+                local hum = myChar:FindFirstChild("Humanoid")
+                if hum then
+                    hum.PlatformStand = false
+                    hum.AutoRotate = true
+                end
+                local root = myChar.HumanoidRootPart
+                root.Velocity = Vector3.new(0, 0, 0)
+                root.RotVelocity = Vector3.new(0, 0, 0)
             end
-            local root = myChar.HumanoidRootPart
-            root.Velocity = Vector3.new(0, 0, 0)
-            root.RotVelocity = Vector3.new(0, 0, 0)
         end
         invisDesyncStatus.Text = "inactive"
         invisDesyncStatus.TextColor3 = Color3.fromRGB(150, 150, 150)
@@ -1706,13 +1708,8 @@ local function startInvisDesync()
     
     invisDesyncOriginalPos = myRoot.CFrame
     
-    myRoot.CFrame = CFrame.new(invisDesyncFarPos)
-    myRoot.Velocity = Vector3.new(0, 0, 0)
-    myRoot.RotVelocity = Vector3.new(0, 0, 0)
-    
     if myHum then
         myHum.PlatformStand = true
-        myHum.AutoRotate = false
     end
     
     invisDesyncActive = true
@@ -1721,6 +1718,10 @@ local function startInvisDesync()
     invisDesyncBtn.BackgroundColor3 = Color3.fromRGB(100, 70, 70)
     invisDesyncBtn.Text = "stop desync"
     
+    local toggle = false
+    local farPos = invisDesyncFarPos
+    local startPos = invisDesyncOriginalPos
+    
     invisDesyncLoop = runService.Heartbeat:Connect(function()
         if not invisDesyncActive then return end
         local char = localPlayer.Character
@@ -1728,18 +1729,24 @@ local function startInvisDesync()
             local root = char.HumanoidRootPart
             local hum = char:FindFirstChild("Humanoid")
             
-            root.CFrame = CFrame.new(invisDesyncFarPos)
+            if toggle then
+                root.CFrame = farPos
+            else
+                root.CFrame = startPos
+            end
+            
+            toggle = not toggle
+            
             root.Velocity = Vector3.new(0, 0, 0)
             root.RotVelocity = Vector3.new(0, 0, 0)
             
             if hum then
                 hum.PlatformStand = true
-                hum.AutoRotate = false
             end
         end
     end)
     
-    notify("desync activated - character frozen at far coordinate", false)
+    notify("desync activated - teleporting between positions", false)
 end
 
 local function clearESP()
