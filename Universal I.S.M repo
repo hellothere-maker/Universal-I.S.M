@@ -1,0 +1,2500 @@
+-- New Update!
+
+-- open source!!
+
+local players = game:GetService("Players")
+local localPlayer = players.LocalPlayer
+local userInputService = game:GetService("UserInputService")
+local httpService = game:GetService("HttpService")
+local tweenService = game:GetService("TweenService")
+local runService = game:GetService("RunService")
+local camera = workspace.CurrentCamera
+
+workspace.FallenPartsDestroyHeight = -500000
+
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "UniversalRepo"
+screenGui.Parent = localPlayer:WaitForChild("PlayerGui")
+screenGui.ResetOnSpawn = false
+screenGui.Enabled = false
+
+local mainContainer = Instance.new("Frame")
+mainContainer.Size = UDim2.new(0, 680, 0, 620)
+mainContainer.Position = UDim2.new(0.5, -340, 0.5, -310)
+mainContainer.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+mainContainer.BorderSizePixel = 0
+mainContainer.ClipsDescendants = true
+mainContainer.Parent = screenGui
+mainContainer.BackgroundTransparency = 1
+
+local mainCorner = Instance.new("UICorner")
+mainCorner.CornerRadius = UDim.new(0, 8)
+mainCorner.Parent = mainContainer
+
+local titleBox = Instance.new("Frame")
+titleBox.Size = UDim2.new(1, 0, 0, 44)
+titleBox.Position = UDim2.new(0, 0, 0, 0)
+titleBox.BackgroundColor3 = Color3.fromRGB(28, 28, 28)
+titleBox.BorderSizePixel = 0
+titleBox.Parent = mainContainer
+
+local titleCorner = Instance.new("UICorner")
+titleCorner.CornerRadius = UDim.new(0, 8)
+titleCorner.Parent = titleBox
+
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(0, 150, 1, 0)
+title.Position = UDim2.new(0, 12, 0, 0)
+title.BackgroundTransparency = 1
+title.Text = "universal repo"
+title.TextColor3 = Color3.fromRGB(220, 220, 220)
+title.TextSize = 18
+title.Font = Enum.Font.GothamBold
+title.TextXAlignment = Enum.TextXAlignment.Left
+title.Parent = titleBox
+
+local closeBtn = Instance.new("TextButton")
+closeBtn.Size = UDim2.new(0, 30, 0, 30)
+closeBtn.Position = UDim2.new(1, -40, 0, 7)
+closeBtn.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+closeBtn.Text = "X"
+closeBtn.TextColor3 = Color3.fromRGB(220, 220, 220)
+closeBtn.TextSize = 18
+closeBtn.Font = Enum.Font.GothamBold
+closeBtn.BorderSizePixel = 0
+closeBtn.Parent = titleBox
+
+local closeCorner = Instance.new("UICorner")
+closeCorner.CornerRadius = UDim.new(0, 6)
+closeCorner.Parent = closeBtn
+
+local titleLine = Instance.new("Frame")
+titleLine.Size = UDim2.new(1, 0, 0, 1)
+titleLine.Position = UDim2.new(0, 0, 1, -1)
+titleLine.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+titleLine.BorderSizePixel = 0
+titleLine.Parent = titleBox
+
+local sectionBox = Instance.new("Frame")
+sectionBox.Size = UDim2.new(0, 160, 1, -44)
+sectionBox.Position = UDim2.new(0, 0, 0, 44)
+sectionBox.BackgroundColor3 = Color3.fromRGB(33, 33, 33)
+sectionBox.BorderSizePixel = 0
+sectionBox.Parent = mainContainer
+
+local sectionBorder = Instance.new("Frame")
+sectionBorder.Size = UDim2.new(0, 1, 1, 0)
+sectionBorder.Position = UDim2.new(1, -1, 0, 0)
+sectionBorder.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+sectionBorder.BorderSizePixel = 0
+sectionBorder.Parent = sectionBox
+
+local tabsLabel = Instance.new("TextLabel")
+tabsLabel.Size = UDim2.new(1, 0, 0, 30)
+tabsLabel.Position = UDim2.new(0, 0, 0, 12)
+tabsLabel.BackgroundTransparency = 1
+tabsLabel.Text = "uni tabs"
+tabsLabel.TextColor3 = Color3.fromRGB(150, 150, 150)
+tabsLabel.TextSize = 12
+tabsLabel.Font = Enum.Font.Gotham
+tabsLabel.TextXAlignment = Enum.TextXAlignment.Center
+tabsLabel.Parent = sectionBox
+
+local menuBox = Instance.new("Frame")
+menuBox.Size = UDim2.new(1, -160, 1, -44)
+menuBox.Position = UDim2.new(0, 160, 0, 44)
+menuBox.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+menuBox.BorderSizePixel = 0
+menuBox.Parent = mainContainer
+
+local menuBorder = Instance.new("Frame")
+menuBorder.Size = UDim2.new(0, 1, 1, 0)
+menuBorder.Position = UDim2.new(0, 0, 0, 0)
+menuBorder.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+menuBorder.BorderSizePixel = 0
+menuBorder.Parent = menuBox
+
+local userCheckBtn = Instance.new("TextButton")
+userCheckBtn.Size = UDim2.new(0, 130, 0, 38)
+userCheckBtn.Position = UDim2.new(0.5, -65, 0, 45)
+userCheckBtn.BackgroundColor3 = Color3.fromRGB(52, 52, 52)
+userCheckBtn.Text = "user check"
+userCheckBtn.TextColor3 = Color3.fromRGB(235, 235, 235)
+userCheckBtn.TextSize = 13
+userCheckBtn.Font = Enum.Font.GothamSemibold
+userCheckBtn.BorderSizePixel = 0
+userCheckBtn.Parent = sectionBox
+
+local btnCorner1 = Instance.new("UICorner")
+btnCorner1.CornerRadius = UDim.new(0, 6)
+btnCorner1.Parent = userCheckBtn
+
+local httpCheckBtn = Instance.new("TextButton")
+httpCheckBtn.Size = UDim2.new(0, 130, 0, 38)
+httpCheckBtn.Position = UDim2.new(0.5, -65, 0, 93)
+httpCheckBtn.BackgroundColor3 = Color3.fromRGB(52, 52, 52)
+httpCheckBtn.Text = "http check"
+httpCheckBtn.TextColor3 = Color3.fromRGB(235, 235, 235)
+httpCheckBtn.TextSize = 13
+httpCheckBtn.Font = Enum.Font.GothamSemibold
+httpCheckBtn.BorderSizePixel = 0
+httpCheckBtn.Parent = sectionBox
+
+local btnCorner2 = Instance.new("UICorner")
+btnCorner2.CornerRadius = UDim.new(0, 6)
+btnCorner2.Parent = httpCheckBtn
+
+local serverTimeBtn = Instance.new("TextButton")
+serverTimeBtn.Size = UDim2.new(0, 130, 0, 38)
+serverTimeBtn.Position = UDim2.new(0.5, -65, 0, 141)
+serverTimeBtn.BackgroundColor3 = Color3.fromRGB(52, 52, 52)
+serverTimeBtn.Text = "server time"
+serverTimeBtn.TextColor3 = Color3.fromRGB(235, 235, 235)
+serverTimeBtn.TextSize = 13
+serverTimeBtn.Font = Enum.Font.GothamSemibold
+serverTimeBtn.BorderSizePixel = 0
+serverTimeBtn.Parent = sectionBox
+
+local btnCorner3 = Instance.new("UICorner")
+btnCorner3.CornerRadius = UDim.new(0, 6)
+btnCorner3.Parent = serverTimeBtn
+
+local coordGrabBtn = Instance.new("TextButton")
+coordGrabBtn.Size = UDim2.new(0, 130, 0, 38)
+coordGrabBtn.Position = UDim2.new(0.5, -65, 0, 189)
+coordGrabBtn.BackgroundColor3 = Color3.fromRGB(52, 52, 52)
+coordGrabBtn.Text = "coordinate grab"
+coordGrabBtn.TextColor3 = Color3.fromRGB(235, 235, 235)
+coordGrabBtn.TextSize = 13
+coordGrabBtn.Font = Enum.Font.GothamSemibold
+coordGrabBtn.BorderSizePixel = 0
+coordGrabBtn.Parent = sectionBox
+
+local btnCorner4 = Instance.new("UICorner")
+btnCorner4.CornerRadius = UDim.new(0, 6)
+btnCorner4.Parent = coordGrabBtn
+
+local flingerBtn = Instance.new("TextButton")
+flingerBtn.Size = UDim2.new(0, 130, 0, 38)
+flingerBtn.Position = UDim2.new(0.5, -65, 0, 237)
+flingerBtn.BackgroundColor3 = Color3.fromRGB(52, 52, 52)
+flingerBtn.Text = "flinger"
+flingerBtn.TextColor3 = Color3.fromRGB(235, 235, 235)
+flingerBtn.TextSize = 13
+flingerBtn.Font = Enum.Font.GothamSemibold
+flingerBtn.BorderSizePixel = 0
+flingerBtn.Parent = sectionBox
+
+local btnCorner5 = Instance.new("UICorner")
+btnCorner5.CornerRadius = UDim.new(0, 6)
+btnCorner5.Parent = flingerBtn
+
+local spawnkillBtn = Instance.new("TextButton")
+spawnkillBtn.Size = UDim2.new(0, 130, 0, 38)
+spawnkillBtn.Position = UDim2.new(0.5, -65, 0, 285)
+spawnkillBtn.BackgroundColor3 = Color3.fromRGB(52, 52, 52)
+spawnkillBtn.Text = "spawnkill"
+spawnkillBtn.TextColor3 = Color3.fromRGB(235, 235, 235)
+spawnkillBtn.TextSize = 13
+spawnkillBtn.Font = Enum.Font.GothamSemibold
+spawnkillBtn.BorderSizePixel = 0
+spawnkillBtn.Parent = sectionBox
+
+local btnCorner7 = Instance.new("UICorner")
+btnCorner7.CornerRadius = UDim.new(0, 6)
+btnCorner7.Parent = spawnkillBtn
+
+local espBtn = Instance.new("TextButton")
+espBtn.Size = UDim2.new(0, 130, 0, 38)
+espBtn.Position = UDim2.new(0.5, -65, 0, 333)
+espBtn.BackgroundColor3 = Color3.fromRGB(52, 52, 52)
+espBtn.Text = "esp"
+espBtn.TextColor3 = Color3.fromRGB(235, 235, 235)
+espBtn.TextSize = 13
+espBtn.Font = Enum.Font.GothamSemibold
+espBtn.BorderSizePixel = 0
+espBtn.Parent = sectionBox
+
+local btnCorner6 = Instance.new("UICorner")
+btnCorner6.CornerRadius = UDim.new(0, 6)
+btnCorner6.Parent = espBtn
+
+local antiBtn = Instance.new("TextButton")
+antiBtn.Size = UDim2.new(0, 130, 0, 38)
+antiBtn.Position = UDim2.new(0.5, -65, 0, 381)
+antiBtn.BackgroundColor3 = Color3.fromRGB(52, 52, 52)
+antiBtn.Text = "anti"
+antiBtn.TextColor3 = Color3.fromRGB(235, 235, 235)
+antiBtn.TextSize = 13
+antiBtn.Font = Enum.Font.GothamSemibold
+antiBtn.BorderSizePixel = 0
+antiBtn.Parent = sectionBox
+
+local antiBtnCorner = Instance.new("UICorner")
+antiBtnCorner.CornerRadius = UDim.new(0, 6)
+antiBtnCorner.Parent = antiBtn
+
+local desyncTabBtn = Instance.new("TextButton")
+desyncTabBtn.Size = UDim2.new(0, 130, 0, 38)
+desyncTabBtn.Position = UDim2.new(0.5, -65, 0, 429)
+desyncTabBtn.BackgroundColor3 = Color3.fromRGB(52, 52, 52)
+desyncTabBtn.Text = "desync"
+desyncTabBtn.TextColor3 = Color3.fromRGB(235, 235, 235)
+desyncTabBtn.TextSize = 13
+desyncTabBtn.Font = Enum.Font.GothamSemibold
+desyncTabBtn.BorderSizePixel = 0
+desyncTabBtn.Parent = sectionBox
+
+local desyncTabCorner = Instance.new("UICorner")
+desyncTabCorner.CornerRadius = UDim.new(0, 6)
+desyncTabCorner.Parent = desyncTabBtn
+
+local bottomBar = Instance.new("Frame")
+bottomBar.Size = UDim2.new(1, 0, 0, 55)
+bottomBar.Position = UDim2.new(0, 0, 1, -55)
+bottomBar.BackgroundColor3 = Color3.fromRGB(33, 33, 33)
+bottomBar.BorderSizePixel = 0
+bottomBar.Parent = mainContainer
+
+local bottomBorder = Instance.new("Frame")
+bottomBorder.Size = UDim2.new(1, 0, 0, 1)
+bottomBorder.Position = UDim2.new(0, 0, 0, 0)
+bottomBorder.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+bottomBorder.BorderSizePixel = 0
+bottomBorder.Parent = bottomBar
+
+local avatarImage = Instance.new("ImageLabel")
+avatarImage.Size = UDim2.new(0, 42, 0, 42)
+avatarImage.Position = UDim2.new(0, 12, 0.5, -21)
+avatarImage.BackgroundColor3 = Color3.fromRGB(55, 55, 55)
+avatarImage.BackgroundTransparency = 0
+avatarImage.BorderSizePixel = 0
+avatarImage.Parent = bottomBar
+
+local avatarCorner = Instance.new("UICorner")
+avatarCorner.CornerRadius = UDim.new(1, 0)
+avatarCorner.Parent = avatarImage
+
+local nameLabel = Instance.new("TextLabel")
+nameLabel.Size = UDim2.new(0, 200, 0, 20)
+nameLabel.Position = UDim2.new(0, 62, 0, 10)
+nameLabel.BackgroundTransparency = 1
+nameLabel.Text = localPlayer.Name
+nameLabel.TextColor3 = Color3.fromRGB(220, 220, 220)
+nameLabel.TextSize = 14
+nameLabel.Font = Enum.Font.GothamSemibold
+nameLabel.TextXAlignment = Enum.TextXAlignment.Left
+nameLabel.Parent = bottomBar
+
+local idLabel = Instance.new("TextLabel")
+idLabel.Size = UDim2.new(0, 200, 0, 18)
+idLabel.Position = UDim2.new(0, 62, 0, 30)
+idLabel.BackgroundTransparency = 1
+idLabel.Text = "id: " .. localPlayer.UserId
+idLabel.TextColor3 = Color3.fromRGB(150, 150, 150)
+idLabel.TextSize = 12
+idLabel.Font = Enum.Font.Gotham
+idLabel.TextXAlignment = Enum.TextXAlignment.Left
+idLabel.Parent = bottomBar
+
+pcall(function()
+    local thumb = players:GetUserThumbnailAsync(localPlayer.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size420x420)
+    if thumb then avatarImage.Image = thumb end
+end)
+
+local displayContainer = Instance.new("Frame")
+displayContainer.Size = UDim2.new(1, -20, 1, -20)
+displayContainer.Position = UDim2.new(0, 10, 0, 10)
+displayContainer.BackgroundColor3 = Color3.fromRGB(38, 38, 38)
+displayContainer.BorderSizePixel = 0
+displayContainer.Parent = menuBox
+
+local displayCorner = Instance.new("UICorner")
+displayCorner.CornerRadius = UDim.new(0, 6)
+displayCorner.Parent = displayContainer
+
+local displayText = Instance.new("TextLabel")
+displayText.Size = UDim2.new(1, -20, 1, -20)
+displayText.Position = UDim2.new(0, 10, 0, 10)
+displayText.BackgroundTransparency = 1
+displayText.Text = "select an option"
+displayText.TextColor3 = Color3.fromRGB(180, 180, 180)
+displayText.TextSize = 14
+displayText.Font = Enum.Font.Gotham
+displayText.TextWrapped = true
+displayText.TextXAlignment = Enum.TextXAlignment.Left
+displayText.TextYAlignment = Enum.TextYAlignment.Top
+displayText.RichText = true
+displayText.Parent = displayContainer
+
+local inputFrame = Instance.new("Frame")
+inputFrame.Size = UDim2.new(1, -20, 0, 85)
+inputFrame.Position = UDim2.new(0, 10, 0, 10)
+inputFrame.BackgroundColor3 = Color3.fromRGB(38, 38, 38)
+inputFrame.BorderSizePixel = 0
+inputFrame.Visible = false
+inputFrame.Parent = menuBox
+
+local inputCorner = Instance.new("UICorner")
+inputCorner.CornerRadius = UDim.new(0, 6)
+inputCorner.Parent = inputFrame
+
+local usernameBox = Instance.new("TextBox")
+usernameBox.Size = UDim2.new(1, -100, 0, 38)
+usernameBox.Position = UDim2.new(0, 0, 0, 12)
+usernameBox.PlaceholderText = "enter roblox username"
+usernameBox.Text = ""
+usernameBox.BackgroundColor3 = Color3.fromRGB(55, 55, 55)
+usernameBox.TextColor3 = Color3.fromRGB(220, 220, 220)
+usernameBox.TextSize = 14
+usernameBox.Font = Enum.Font.Gotham
+usernameBox.BorderSizePixel = 0
+usernameBox.Parent = inputFrame
+
+local inputBoxCorner = Instance.new("UICorner")
+inputBoxCorner.CornerRadius = UDim.new(0, 4)
+inputBoxCorner.Parent = usernameBox
+
+local executeBtn = Instance.new("TextButton")
+executeBtn.Size = UDim2.new(0, 85, 0, 38)
+executeBtn.Position = UDim2.new(1, -95, 0, 12)
+executeBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+executeBtn.Text = "execute"
+executeBtn.TextColor3 = Color3.fromRGB(235, 235, 235)
+executeBtn.TextSize = 13
+executeBtn.Font = Enum.Font.GothamSemibold
+executeBtn.BorderSizePixel = 0
+executeBtn.Parent = inputFrame
+
+local executeCorner = Instance.new("UICorner")
+executeCorner.CornerRadius = UDim.new(0, 4)
+executeCorner.Parent = executeBtn
+
+local resultFrame = Instance.new("Frame")
+resultFrame.Size = UDim2.new(1, -20, 1, -110)
+resultFrame.Position = UDim2.new(0, 10, 0, 105)
+resultFrame.BackgroundColor3 = Color3.fromRGB(33, 33, 33)
+resultFrame.BorderSizePixel = 0
+resultFrame.Visible = false
+resultFrame.Parent = menuBox
+
+local resultCorner = Instance.new("UICorner")
+resultCorner.CornerRadius = UDim.new(0, 6)
+resultCorner.Parent = resultFrame
+
+local resultText = Instance.new("TextLabel")
+resultText.Size = UDim2.new(1, -20, 1, -20)
+resultText.Position = UDim2.new(0, 10, 0, 10)
+resultText.BackgroundTransparency = 1
+resultText.Text = ""
+resultText.TextColor3 = Color3.fromRGB(200, 200, 200)
+resultText.TextSize = 13
+resultText.Font = Enum.Font.Gotham
+resultText.TextWrapped = true
+resultText.TextXAlignment = Enum.TextXAlignment.Left
+resultText.TextYAlignment = Enum.TextYAlignment.Top
+resultText.RichText = true
+resultText.Parent = resultFrame
+
+local httpFrame = Instance.new("Frame")
+httpFrame.Size = UDim2.new(1, -20, 1, -20)
+httpFrame.Position = UDim2.new(0, 10, 0, 10)
+httpFrame.BackgroundColor3 = Color3.fromRGB(38, 38, 38)
+httpFrame.BorderSizePixel = 0
+httpFrame.Visible = false
+httpFrame.Parent = menuBox
+
+local httpCorner = Instance.new("UICorner")
+httpCorner.CornerRadius = UDim.new(0, 6)
+httpCorner.Parent = httpFrame
+
+local httpInfo = Instance.new("TextLabel")
+httpInfo.Size = UDim2.new(1, -20, 0, 60)
+httpInfo.Position = UDim2.new(0, 10, 0, 15)
+httpInfo.BackgroundTransparency = 1
+httpInfo.Text = "check if the game has http enabled or disabled"
+httpInfo.TextColor3 = Color3.fromRGB(180, 180, 180)
+httpInfo.TextSize = 14
+httpInfo.Font = Enum.Font.Gotham
+httpInfo.TextWrapped = true
+httpInfo.TextXAlignment = Enum.TextXAlignment.Center
+httpInfo.Parent = httpFrame
+
+local checkHttpBtn = Instance.new("TextButton")
+checkHttpBtn.Size = UDim2.new(0, 120, 0, 40)
+checkHttpBtn.Position = UDim2.new(0.5, -60, 0, 90)
+checkHttpBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+checkHttpBtn.Text = "check"
+checkHttpBtn.TextColor3 = Color3.fromRGB(235, 235, 235)
+checkHttpBtn.TextSize = 14
+checkHttpBtn.Font = Enum.Font.GothamSemibold
+checkHttpBtn.BorderSizePixel = 0
+checkHttpBtn.Parent = httpFrame
+
+local checkHttpCorner = Instance.new("UICorner")
+checkHttpCorner.CornerRadius = UDim.new(0, 6)
+checkHttpCorner.Parent = checkHttpBtn
+
+local httpResult = Instance.new("TextLabel")
+httpResult.Size = UDim2.new(1, -20, 0, 50)
+httpResult.Position = UDim2.new(0, 10, 0, 145)
+httpResult.BackgroundTransparency = 1
+httpResult.Text = ""
+httpResult.TextColor3 = Color3.fromRGB(200, 200, 200)
+httpResult.TextSize = 14
+httpResult.Font = Enum.Font.Gotham
+httpResult.TextWrapped = true
+httpResult.TextXAlignment = Enum.TextXAlignment.Center
+httpResult.RichText = true
+httpResult.Parent = httpFrame
+
+local timeFrame = Instance.new("Frame")
+timeFrame.Size = UDim2.new(1, -20, 1, -20)
+timeFrame.Position = UDim2.new(0, 10, 0, 10)
+timeFrame.BackgroundColor3 = Color3.fromRGB(38, 38, 38)
+timeFrame.BorderSizePixel = 0
+timeFrame.Visible = false
+timeFrame.Parent = menuBox
+
+local timeCorner = Instance.new("UICorner")
+timeCorner.CornerRadius = UDim.new(0, 6)
+timeCorner.Parent = timeFrame
+
+local timeText = Instance.new("TextLabel")
+timeText.Size = UDim2.new(1, -20, 1, -20)
+timeText.Position = UDim2.new(0, 10, 0, 10)
+timeText.BackgroundTransparency = 1
+timeText.Text = ""
+timeText.TextColor3 = Color3.fromRGB(200, 200, 200)
+timeText.TextSize = 16
+timeText.Font = Enum.Font.Gotham
+timeText.TextWrapped = true
+timeText.TextXAlignment = Enum.TextXAlignment.Center
+timeText.TextYAlignment = Enum.TextYAlignment.Center
+timeText.RichText = true
+timeText.Parent = timeFrame
+
+local coordFrame = Instance.new("Frame")
+coordFrame.Size = UDim2.new(1, -20, 1, -20)
+coordFrame.Position = UDim2.new(0, 10, 0, 10)
+coordFrame.BackgroundColor3 = Color3.fromRGB(38, 38, 38)
+coordFrame.BorderSizePixel = 0
+coordFrame.Visible = false
+coordFrame.Parent = menuBox
+
+local coordCorner = Instance.new("UICorner")
+coordCorner.CornerRadius = UDim.new(0, 6)
+coordCorner.Parent = coordFrame
+
+local coordInfo = Instance.new("TextLabel")
+coordInfo.Size = UDim2.new(1, -20, 0, 40)
+coordInfo.Position = UDim2.new(0, 10, 0, 15)
+coordInfo.BackgroundTransparency = 1
+coordInfo.Text = "grab your current position"
+coordInfo.TextColor3 = Color3.fromRGB(180, 180, 180)
+coordInfo.TextSize = 14
+coordInfo.Font = Enum.Font.Gotham
+coordInfo.TextWrapped = true
+coordInfo.TextXAlignment = Enum.TextXAlignment.Center
+coordInfo.Parent = coordFrame
+
+local grabCoordBtn = Instance.new("TextButton")
+grabCoordBtn.Size = UDim2.new(0, 140, 0, 40)
+grabCoordBtn.Position = UDim2.new(0.5, -70, 0, 65)
+grabCoordBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+grabCoordBtn.Text = "grab coordinate"
+grabCoordBtn.TextColor3 = Color3.fromRGB(235, 235, 235)
+grabCoordBtn.TextSize = 14
+grabCoordBtn.Font = Enum.Font.GothamSemibold
+grabCoordBtn.BorderSizePixel = 0
+grabCoordBtn.Parent = coordFrame
+
+local grabCorner = Instance.new("UICorner")
+grabCorner.CornerRadius = UDim.new(0, 6)
+grabCorner.Parent = grabCoordBtn
+
+local coordResult = Instance.new("TextLabel")
+coordResult.Size = UDim2.new(1, -20, 0, 80)
+coordResult.Position = UDim2.new(0, 10, 0, 115)
+coordResult.BackgroundTransparency = 1
+coordResult.Text = ""
+coordResult.TextColor3 = Color3.fromRGB(200, 200, 200)
+coordResult.TextSize = 14
+coordResult.Font = Enum.Font.Gotham
+coordResult.TextWrapped = true
+coordResult.TextXAlignment = Enum.TextXAlignment.Center
+coordResult.RichText = true
+coordResult.Parent = coordFrame
+
+local copyCoordBtn = Instance.new("TextButton")
+copyCoordBtn.Size = UDim2.new(0, 140, 0, 40)
+copyCoordBtn.Position = UDim2.new(0.5, -70, 0, 205)
+copyCoordBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+copyCoordBtn.Text = "copy coordinate"
+copyCoordBtn.TextColor3 = Color3.fromRGB(235, 235, 235)
+copyCoordBtn.TextSize = 14
+copyCoordBtn.Font = Enum.Font.GothamSemibold
+copyCoordBtn.BorderSizePixel = 0
+copyCoordBtn.Visible = false
+copyCoordBtn.Parent = coordFrame
+
+local copyCorner = Instance.new("UICorner")
+copyCorner.CornerRadius = UDim.new(0, 6)
+copyCorner.Parent = copyCoordBtn
+
+local flingerFrame = Instance.new("Frame")
+flingerFrame.Size = UDim2.new(1, -20, 1, -20)
+flingerFrame.Position = UDim2.new(0, 10, 0, 10)
+flingerFrame.BackgroundColor3 = Color3.fromRGB(38, 38, 38)
+flingerFrame.BorderSizePixel = 0
+flingerFrame.Visible = false
+flingerFrame.Parent = menuBox
+
+local flingerCorner = Instance.new("UICorner")
+flingerCorner.CornerRadius = UDim.new(0, 6)
+flingerCorner.Parent = flingerFrame
+
+local flingerInfo = Instance.new("TextLabel")
+flingerInfo.Size = UDim2.new(1, -20, 0, 40)
+flingerInfo.Position = UDim2.new(0, 10, 0, 15)
+flingerInfo.BackgroundTransparency = 1
+flingerInfo.Text = "enter username to fling"
+flingerInfo.TextColor3 = Color3.fromRGB(180, 180, 180)
+flingerInfo.TextSize = 14
+flingerInfo.Font = Enum.Font.Gotham
+flingerInfo.TextWrapped = true
+flingerInfo.TextXAlignment = Enum.TextXAlignment.Center
+flingerInfo.Parent = flingerFrame
+
+local flingerUserBox = Instance.new("TextBox")
+flingerUserBox.Size = UDim2.new(1, -100, 0, 38)
+flingerUserBox.Position = UDim2.new(0, 10, 0, 65)
+flingerUserBox.PlaceholderText = "roblox username"
+flingerUserBox.Text = ""
+flingerUserBox.BackgroundColor3 = Color3.fromRGB(55, 55, 55)
+flingerUserBox.TextColor3 = Color3.fromRGB(220, 220, 220)
+flingerUserBox.TextSize = 14
+flingerUserBox.Font = Enum.Font.Gotham
+flingerUserBox.BorderSizePixel = 0
+flingerUserBox.Parent = flingerFrame
+
+local flingerBoxCorner = Instance.new("UICorner")
+flingerBoxCorner.CornerRadius = UDim.new(0, 4)
+flingerBoxCorner.Parent = flingerUserBox
+
+local flingerExecBtn = Instance.new("TextButton")
+flingerExecBtn.Size = UDim2.new(0, 85, 0, 38)
+flingerExecBtn.Position = UDim2.new(1, -105, 0, 65)
+flingerExecBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+flingerExecBtn.Text = "fling"
+flingerExecBtn.TextColor3 = Color3.fromRGB(235, 235, 235)
+flingerExecBtn.TextSize = 13
+flingerExecBtn.Font = Enum.Font.GothamSemibold
+flingerExecBtn.BorderSizePixel = 0
+flingerExecBtn.Parent = flingerFrame
+
+local flingerExecCorner = Instance.new("UICorner")
+flingerExecCorner.CornerRadius = UDim.new(0, 4)
+flingerExecCorner.Parent = flingerExecBtn
+
+local stopFlingBtn = Instance.new("TextButton")
+stopFlingBtn.Size = UDim2.new(0, 85, 0, 38)
+stopFlingBtn.Position = UDim2.new(1, -105, 0, 115)
+stopFlingBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+stopFlingBtn.Text = "stop"
+stopFlingBtn.TextColor3 = Color3.fromRGB(235, 235, 235)
+stopFlingBtn.TextSize = 13
+stopFlingBtn.Font = Enum.Font.GothamSemibold
+stopFlingBtn.BorderSizePixel = 0
+stopFlingBtn.Parent = flingerFrame
+
+local stopFlingCorner = Instance.new("UICorner")
+stopFlingCorner.CornerRadius = UDim.new(0, 4)
+stopFlingCorner.Parent = stopFlingBtn
+
+local flingerStatus = Instance.new("TextLabel")
+flingerStatus.Size = UDim2.new(1, -20, 0, 40)
+flingerStatus.Position = UDim2.new(0, 10, 0, 165)
+flingerStatus.BackgroundTransparency = 1
+flingerStatus.Text = ""
+flingerStatus.TextColor3 = Color3.fromRGB(200, 200, 200)
+flingerStatus.TextSize = 12
+flingerStatus.Font = Enum.Font.Gotham
+flingerStatus.TextWrapped = true
+flingerStatus.TextXAlignment = Enum.TextXAlignment.Center
+flingerStatus.RichText = true
+flingerStatus.Parent = flingerFrame
+
+local spawnkillFrame = Instance.new("Frame")
+spawnkillFrame.Size = UDim2.new(1, -20, 1, -20)
+spawnkillFrame.Position = UDim2.new(0, 10, 0, 10)
+spawnkillFrame.BackgroundColor3 = Color3.fromRGB(38, 38, 38)
+spawnkillFrame.BorderSizePixel = 0
+spawnkillFrame.Visible = false
+spawnkillFrame.Parent = menuBox
+
+local spawnkillCorner = Instance.new("UICorner")
+spawnkillCorner.CornerRadius = UDim.new(0, 6)
+spawnkillCorner.Parent = spawnkillFrame
+
+local spawnkillInfo = Instance.new("TextLabel")
+spawnkillInfo.Size = UDim2.new(1, -20, 0, 40)
+spawnkillInfo.Position = UDim2.new(0, 10, 0, 15)
+spawnkillInfo.BackgroundTransparency = 1
+spawnkillInfo.Text = "enter username to spawnkill"
+spawnkillInfo.TextColor3 = Color3.fromRGB(180, 180, 180)
+spawnkillInfo.TextSize = 14
+spawnkillInfo.Font = Enum.Font.Gotham
+spawnkillInfo.TextWrapped = true
+spawnkillInfo.TextXAlignment = Enum.TextXAlignment.Center
+spawnkillInfo.Parent = spawnkillFrame
+
+local spawnkillUserBox = Instance.new("TextBox")
+spawnkillUserBox.Size = UDim2.new(1, -100, 0, 38)
+spawnkillUserBox.Position = UDim2.new(0, 10, 0, 65)
+spawnkillUserBox.PlaceholderText = "roblox username"
+spawnkillUserBox.Text = ""
+spawnkillUserBox.BackgroundColor3 = Color3.fromRGB(55, 55, 55)
+spawnkillUserBox.TextColor3 = Color3.fromRGB(220, 220, 220)
+spawnkillUserBox.TextSize = 14
+spawnkillUserBox.Font = Enum.Font.Gotham
+spawnkillUserBox.BorderSizePixel = 0
+spawnkillUserBox.Parent = spawnkillFrame
+
+local spawnkillBoxCorner = Instance.new("UICorner")
+spawnkillBoxCorner.CornerRadius = UDim.new(0, 4)
+spawnkillBoxCorner.Parent = spawnkillUserBox
+
+local spawnkillExecBtn = Instance.new("TextButton")
+spawnkillExecBtn.Size = UDim2.new(0, 85, 0, 38)
+spawnkillExecBtn.Position = UDim2.new(1, -105, 0, 65)
+spawnkillExecBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+spawnkillExecBtn.Text = "start"
+spawnkillExecBtn.TextColor3 = Color3.fromRGB(235, 235, 235)
+spawnkillExecBtn.TextSize = 13
+spawnkillExecBtn.Font = Enum.Font.GothamSemibold
+spawnkillExecBtn.BorderSizePixel = 0
+spawnkillExecBtn.Parent = spawnkillFrame
+
+local spawnkillExecCorner = Instance.new("UICorner")
+spawnkillExecCorner.CornerRadius = UDim.new(0, 4)
+spawnkillExecCorner.Parent = spawnkillExecBtn
+
+local stopSpawnkillBtn = Instance.new("TextButton")
+stopSpawnkillBtn.Size = UDim2.new(0, 85, 0, 38)
+stopSpawnkillBtn.Position = UDim2.new(1, -105, 0, 115)
+stopSpawnkillBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+stopSpawnkillBtn.Text = "stop"
+stopSpawnkillBtn.TextColor3 = Color3.fromRGB(235, 235, 235)
+stopSpawnkillBtn.TextSize = 13
+stopSpawnkillBtn.Font = Enum.Font.GothamSemibold
+stopSpawnkillBtn.BorderSizePixel = 0
+stopSpawnkillBtn.Parent = spawnkillFrame
+
+local stopSpawnkillCorner = Instance.new("UICorner")
+stopSpawnkillCorner.CornerRadius = UDim.new(0, 4)
+stopSpawnkillCorner.Parent = stopSpawnkillBtn
+
+local spawnkillStatus = Instance.new("TextLabel")
+spawnkillStatus.Size = UDim2.new(1, -20, 0, 40)
+spawnkillStatus.Position = UDim2.new(0, 10, 0, 165)
+spawnkillStatus.BackgroundTransparency = 1
+spawnkillStatus.Text = ""
+spawnkillStatus.TextColor3 = Color3.fromRGB(200, 200, 200)
+spawnkillStatus.TextSize = 12
+spawnkillStatus.Font = Enum.Font.Gotham
+spawnkillStatus.TextWrapped = true
+spawnkillStatus.TextXAlignment = Enum.TextXAlignment.Center
+spawnkillStatus.RichText = true
+spawnkillStatus.Parent = spawnkillFrame
+
+local espFrame = Instance.new("Frame")
+espFrame.Size = UDim2.new(1, -20, 1, -20)
+espFrame.Position = UDim2.new(0, 10, 0, 10)
+espFrame.BackgroundColor3 = Color3.fromRGB(38, 38, 38)
+espFrame.BorderSizePixel = 0
+espFrame.Visible = false
+espFrame.Parent = menuBox
+
+local espCorner = Instance.new("UICorner")
+espCorner.CornerRadius = UDim.new(0, 6)
+espCorner.Parent = espFrame
+
+local espTitle = Instance.new("TextLabel")
+espTitle.Size = UDim2.new(1, 0, 0, 32)
+espTitle.Position = UDim2.new(0, 0, 0, 8)
+espTitle.BackgroundTransparency = 1
+espTitle.Text = "visuals"
+espTitle.TextColor3 = Color3.fromRGB(220, 220, 220)
+espTitle.TextSize = 16
+espTitle.Font = Enum.Font.GothamBold
+espTitle.TextXAlignment = Enum.TextXAlignment.Center
+espTitle.Parent = espFrame
+
+local espDivider = Instance.new("Frame")
+espDivider.Size = UDim2.new(0.85, 0, 0, 1)
+espDivider.Position = UDim2.new(0.075, 0, 0, 42)
+espDivider.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+espDivider.BorderSizePixel = 0
+espDivider.Parent = espFrame
+
+local nameplateBtn = Instance.new("TextButton")
+nameplateBtn.Size = UDim2.new(0, 130, 0, 38)
+nameplateBtn.Position = UDim2.new(0.5, -65, 0, 58)
+nameplateBtn.BackgroundColor3 = Color3.fromRGB(52, 52, 52)
+nameplateBtn.Text = "nameplates"
+nameplateBtn.TextColor3 = Color3.fromRGB(220, 220, 220)
+nameplateBtn.TextSize = 13
+nameplateBtn.Font = Enum.Font.GothamSemibold
+nameplateBtn.BorderSizePixel = 0
+nameplateBtn.Parent = espFrame
+
+local nameplateCorner = Instance.new("UICorner")
+nameplateCorner.CornerRadius = UDim.new(0, 6)
+nameplateCorner.Parent = nameplateBtn
+
+local highlightBtn = Instance.new("TextButton")
+highlightBtn.Size = UDim2.new(0, 130, 0, 38)
+highlightBtn.Position = UDim2.new(0.5, -65, 0, 106)
+highlightBtn.BackgroundColor3 = Color3.fromRGB(52, 52, 52)
+highlightBtn.Text = "highlight"
+highlightBtn.TextColor3 = Color3.fromRGB(220, 220, 220)
+highlightBtn.TextSize = 13
+highlightBtn.Font = Enum.Font.GothamSemibold
+highlightBtn.BorderSizePixel = 0
+highlightBtn.Parent = espFrame
+
+local highlightCorner = Instance.new("UICorner")
+highlightCorner.CornerRadius = UDim.new(0, 6)
+highlightCorner.Parent = highlightBtn
+
+local tracerBtn = Instance.new("TextButton")
+tracerBtn.Size = UDim2.new(0, 130, 0, 38)
+tracerBtn.Position = UDim2.new(0.5, -65, 0, 154)
+tracerBtn.BackgroundColor3 = Color3.fromRGB(52, 52, 52)
+tracerBtn.Text = "tracers"
+tracerBtn.TextColor3 = Color3.fromRGB(220, 220, 220)
+tracerBtn.TextSize = 13
+tracerBtn.Font = Enum.Font.GothamSemibold
+tracerBtn.BorderSizePixel = 0
+tracerBtn.Parent = espFrame
+
+local tracerCorner = Instance.new("UICorner")
+tracerCorner.CornerRadius = UDim.new(0, 6)
+tracerCorner.Parent = tracerBtn
+
+local skeletonBtn = Instance.new("TextButton")
+skeletonBtn.Size = UDim2.new(0, 130, 0, 38)
+skeletonBtn.Position = UDim2.new(0.5, -65, 0, 202)
+skeletonBtn.BackgroundColor3 = Color3.fromRGB(52, 52, 52)
+skeletonBtn.Text = "skeleton"
+skeletonBtn.TextColor3 = Color3.fromRGB(220, 220, 220)
+skeletonBtn.TextSize = 13
+skeletonBtn.Font = Enum.Font.GothamSemibold
+skeletonBtn.BorderSizePixel = 0
+skeletonBtn.Parent = espFrame
+
+local skeletonCorner = Instance.new("UICorner")
+skeletonCorner.CornerRadius = UDim.new(0, 6)
+skeletonCorner.Parent = skeletonBtn
+
+local espStatus = Instance.new("TextLabel")
+espStatus.Size = UDim2.new(1, -30, 0, 28)
+espStatus.Position = UDim2.new(0, 15, 0, 255)
+espStatus.BackgroundTransparency = 1
+espStatus.Text = "disabled"
+espStatus.TextColor3 = Color3.fromRGB(150, 150, 150)
+espStatus.TextSize = 11
+espStatus.Font = Enum.Font.Gotham
+espStatus.TextXAlignment = Enum.TextXAlignment.Center
+espStatus.Parent = espFrame
+
+local espMasterBtn = Instance.new("TextButton")
+espMasterBtn.Size = UDim2.new(0, 130, 0, 38)
+espMasterBtn.Position = UDim2.new(0.5, -65, 0, 290)
+espMasterBtn.BackgroundColor3 = Color3.fromRGB(70, 100, 70)
+espMasterBtn.Text = "enable esp"
+espMasterBtn.TextColor3 = Color3.fromRGB(235, 235, 235)
+espMasterBtn.TextSize = 13
+espMasterBtn.Font = Enum.Font.GothamSemibold
+espMasterBtn.BorderSizePixel = 0
+espMasterBtn.Parent = espFrame
+
+local espMasterCorner = Instance.new("UICorner")
+espMasterCorner.CornerRadius = UDim.new(0, 6)
+espMasterCorner.Parent = espMasterBtn
+
+local antiFrame = Instance.new("Frame")
+antiFrame.Size = UDim2.new(1, -20, 1, -20)
+antiFrame.Position = UDim2.new(0, 10, 0, 10)
+antiFrame.BackgroundColor3 = Color3.fromRGB(38, 38, 38)
+antiFrame.BorderSizePixel = 0
+antiFrame.Visible = false
+antiFrame.Parent = menuBox
+
+local antiCorner = Instance.new("UICorner")
+antiCorner.CornerRadius = UDim.new(0, 6)
+antiCorner.Parent = antiFrame
+
+local antiTitle = Instance.new("TextLabel")
+antiTitle.Size = UDim2.new(1, 0, 0, 32)
+antiTitle.Position = UDim2.new(0, 0, 0, 8)
+antiTitle.BackgroundTransparency = 1
+antiTitle.Text = "anti follow"
+antiTitle.TextColor3 = Color3.fromRGB(220, 220, 220)
+antiTitle.TextSize = 16
+antiTitle.Font = Enum.Font.GothamBold
+antiTitle.TextXAlignment = Enum.TextXAlignment.Center
+antiTitle.Parent = antiFrame
+
+local antiDivider = Instance.new("Frame")
+antiDivider.Size = UDim2.new(0.85, 0, 0, 1)
+antiDivider.Position = UDim2.new(0.075, 0, 0, 42)
+antiDivider.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+antiDivider.BorderSizePixel = 0
+antiDivider.Parent = antiFrame
+
+local antiStartBtn = Instance.new("TextButton")
+antiStartBtn.Size = UDim2.new(0, 140, 0, 40)
+antiStartBtn.Position = UDim2.new(0.5, -70, 0, 65)
+antiStartBtn.BackgroundColor3 = Color3.fromRGB(70, 100, 70)
+antiStartBtn.Text = "start the anti"
+antiStartBtn.TextColor3 = Color3.fromRGB(235, 235, 235)
+antiStartBtn.TextSize = 13
+antiStartBtn.Font = Enum.Font.GothamSemibold
+antiStartBtn.BorderSizePixel = 0
+antiStartBtn.Parent = antiFrame
+
+local antiStartCorner = Instance.new("UICorner")
+antiStartCorner.CornerRadius = UDim.new(0, 6)
+antiStartCorner.Parent = antiStartBtn
+
+local antiStopBtn = Instance.new("TextButton")
+antiStopBtn.Size = UDim2.new(0, 140, 0, 40)
+antiStopBtn.Position = UDim2.new(0.5, -70, 0, 120)
+antiStopBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+antiStopBtn.Text = "stop"
+antiStopBtn.TextColor3 = Color3.fromRGB(235, 235, 235)
+antiStopBtn.TextSize = 13
+antiStopBtn.Font = Enum.Font.GothamSemibold
+antiStopBtn.BorderSizePixel = 0
+antiStopBtn.Parent = antiFrame
+
+local antiStopCorner = Instance.new("UICorner")
+antiStopCorner.CornerRadius = UDim.new(0, 6)
+antiStopCorner.Parent = antiStopBtn
+
+local antiStatus = Instance.new("TextLabel")
+antiStatus.Size = UDim2.new(1, -30, 0, 28)
+antiStatus.Position = UDim2.new(0, 15, 0, 175)
+antiStatus.BackgroundTransparency = 1
+antiStatus.Text = "idle"
+antiStatus.TextColor3 = Color3.fromRGB(150, 150, 150)
+antiStatus.TextSize = 11
+antiStatus.Font = Enum.Font.Gotham
+antiStatus.TextXAlignment = Enum.TextXAlignment.Center
+antiStatus.Parent = antiFrame
+
+local desyncFrame = Instance.new("Frame")
+desyncFrame.Size = UDim2.new(1, -20, 1, -20)
+desyncFrame.Position = UDim2.new(0, 10, 0, 10)
+desyncFrame.BackgroundColor3 = Color3.fromRGB(38, 38, 38)
+desyncFrame.BorderSizePixel = 0
+desyncFrame.Visible = false
+desyncFrame.Parent = menuBox
+
+local desyncCorner = Instance.new("UICorner")
+desyncCorner.CornerRadius = UDim.new(0, 6)
+desyncCorner.Parent = desyncFrame
+
+local desyncTitle = Instance.new("TextLabel")
+desyncTitle.Size = UDim2.new(1, 0, 0, 32)
+desyncTitle.Position = UDim2.new(0, 0, 0, 8)
+desyncTitle.BackgroundTransparency = 1
+desyncTitle.Text = "desync"
+desyncTitle.TextColor3 = Color3.fromRGB(220, 220, 220)
+desyncTitle.TextSize = 16
+desyncTitle.Font = Enum.Font.GothamBold
+desyncTitle.TextXAlignment = Enum.TextXAlignment.Center
+desyncTitle.Parent = desyncFrame
+
+local desyncDivider = Instance.new("Frame")
+desyncDivider.Size = UDim2.new(0.85, 0, 0, 1)
+desyncDivider.Position = UDim2.new(0.075, 0, 0, 42)
+desyncDivider.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+desyncDivider.BorderSizePixel = 0
+desyncDivider.Parent = desyncFrame
+
+local invisDesyncBtn = Instance.new("TextButton")
+invisDesyncBtn.Size = UDim2.new(0, 140, 0, 40)
+invisDesyncBtn.Position = UDim2.new(0.5, -70, 0, 65)
+invisDesyncBtn.BackgroundColor3 = Color3.fromRGB(70, 100, 70)
+invisDesyncBtn.Text = "invis desync"
+invisDesyncBtn.TextColor3 = Color3.fromRGB(235, 235, 235)
+invisDesyncBtn.TextSize = 13
+invisDesyncBtn.Font = Enum.Font.GothamSemibold
+invisDesyncBtn.BorderSizePixel = 0
+invisDesyncBtn.Parent = desyncFrame
+
+local invisDesyncCorner = Instance.new("UICorner")
+invisDesyncCorner.CornerRadius = UDim.new(0, 6)
+invisDesyncCorner.Parent = invisDesyncBtn
+
+local invisDesyncStatus = Instance.new("TextLabel")
+invisDesyncStatus.Size = UDim2.new(1, -30, 0, 28)
+invisDesyncStatus.Position = UDim2.new(0, 15, 0, 120)
+invisDesyncStatus.BackgroundTransparency = 1
+invisDesyncStatus.Text = "inactive"
+invisDesyncStatus.TextColor3 = Color3.fromRGB(150, 150, 150)
+invisDesyncStatus.TextSize = 11
+invisDesyncStatus.Font = Enum.Font.Gotham
+invisDesyncStatus.TextXAlignment = Enum.TextXAlignment.Center
+invisDesyncStatus.Parent = desyncFrame
+
+local notifContainer = Instance.new("Frame")
+notifContainer.Size = UDim2.new(0, 320, 0, 70)
+notifContainer.Position = UDim2.new(1, -340, 0, 20)
+notifContainer.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+notifContainer.BackgroundTransparency = 1
+notifContainer.Visible = false
+notifContainer.Parent = screenGui
+
+local notifCorner = Instance.new("UICorner")
+notifCorner.CornerRadius = UDim.new(0, 6)
+notifCorner.Parent = notifContainer
+
+local notifBorder = Instance.new("Frame")
+notifBorder.Size = UDim2.new(1, 0, 0, 1)
+notifBorder.Position = UDim2.new(0, 0, 0, 0)
+notifBorder.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+notifBorder.BorderSizePixel = 0
+notifBorder.Parent = notifContainer
+
+local notifText = Instance.new("TextLabel")
+notifText.Size = UDim2.new(1, -20, 1, -20)
+notifText.Position = UDim2.new(0, 10, 0, 10)
+notifText.BackgroundTransparency = 1
+notifText.Text = ""
+notifText.TextColor3 = Color3.fromRGB(220, 220, 220)
+notifText.TextSize = 13
+notifText.Font = Enum.Font.Gotham
+notifText.TextWrapped = true
+notifText.Parent = notifContainer
+
+local dragging = false
+local dragStart
+local startPos
+local currentCoords = ""
+
+local bodyVel = nil
+local flingActive = false
+local flingLoop = nil
+local originalPos = nil
+local victimStartPos = nil
+local flingCheck = nil
+local charAdded = nil
+local charRemoving = nil
+local safeSpot = Vector3.new(-96371, 70664, 42297)
+
+local spawnkillActive = false
+local spawnkillLoop = nil
+local spawnkillTarget = nil
+local spawnkillBodyVel = nil
+local spawnkillSafe = Vector3.new(70475, 86521, 106791)
+local spawnkillVoidSafe = Vector3.new(8798, 2958009, 33661)
+local spawnkillOriginalPos = nil
+local spawnkillWaitingForRespawn = false
+local spawnkillInVoid = false
+local spawnkillTeleportLoop = nil
+
+local antiActive = false
+local antiLoop = nil
+local antiOriginalPos = nil
+local antiIndex = 1
+local antiCoords = {
+    Vector3.new(8206287, 2037503, 5108742),
+    Vector3.new(-13234680, 2037503, 11506023),
+    Vector3.new(14238021, 654027, -3993725),
+    Vector3.new(-6094, 9565549, -139277),
+    Vector3.new(-301, -3898, 3385),
+    Vector3.new(1449305, 216067584, -8046635)
+}
+
+local invisDesyncActive = false
+local invisDesyncLoop = nil
+local invisDesyncFarPos = Vector3.new(1007557148672, 1007510421504, -866893824000)
+local invisDesyncOriginalPos = nil
+
+local espActive = false
+local nameplatesActive = false
+local highlightsActive = false
+local tracersActive = false
+local skeletonActive = false
+local nameplates = {}
+local highlights = {}
+local tracers = {}
+local skeletons = {}
+local espLoop = nil
+local playerAddedConn = nil
+local playerRemovingConn = nil
+
+local skeletonParts = {
+    {"Head", "UpperTorso"},
+    {"UpperTorso", "LowerTorso"},
+    {"UpperTorso", "LeftUpperArm"},
+    {"LeftUpperArm", "LeftLowerArm"},
+    {"LeftLowerArm", "LeftHand"},
+    {"UpperTorso", "RightUpperArm"},
+    {"RightUpperArm", "RightLowerArm"},
+    {"RightLowerArm", "RightHand"},
+    {"LowerTorso", "LeftUpperLeg"},
+    {"LeftUpperLeg", "LeftLowerLeg"},
+    {"LeftLowerLeg", "LeftFoot"},
+    {"LowerTorso", "RightUpperLeg"},
+    {"RightUpperLeg", "RightLowerLeg"},
+    {"RightLowerLeg", "RightFoot"}
+}
+
+titleBox.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = true
+        dragStart = input.Position
+        startPos = mainContainer.Position
+    end
+end)
+
+userInputService.InputChanged:Connect(function(input)
+    if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+        local delta = input.Position - dragStart
+        mainContainer.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+    end
+end)
+
+userInputService.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = false
+    end
+end)
+
+local function notify(msg, isErr)
+    notifText.Text = msg
+    if isErr then
+        notifContainer.BackgroundColor3 = Color3.fromRGB(70, 50, 50)
+        notifBorder.BackgroundColor3 = Color3.fromRGB(120, 70, 70)
+    else
+        notifContainer.BackgroundColor3 = Color3.fromRGB(50, 70, 50)
+        notifBorder.BackgroundColor3 = Color3.fromRGB(80, 110, 80)
+    end
+    notifContainer.Visible = true
+    notifContainer.BackgroundTransparency = 1
+    local fadeIn = tweenService:Create(notifContainer, TweenInfo.new(0.3, Enum.EasingStyle.Quad), {BackgroundTransparency = 0})
+    fadeIn:Play()
+    fadeIn.Completed:Wait()
+    task.wait(2.5)
+    local fadeOut = tweenService:Create(notifContainer, TweenInfo.new(0.3, Enum.EasingStyle.Quad), {BackgroundTransparency = 1})
+    fadeOut:Play()
+    fadeOut.Completed:Wait()
+    notifContainer.Visible = false
+end
+
+local function copyToClip(text)
+    if setclipboard then
+        setclipboard(text)
+        notify("copied: " .. text, false)
+    elseif syn and syn.setclipboard then
+        syn.setclipboard(text)
+        notify("copied: " .. text, false)
+    elseif syn and syn.clipboard and syn.clipboard.set then
+        syn.clipboard.set(text)
+        notify("copied: " .. text, false)
+    else
+        notify("clipboard not available", true)
+    end
+end
+
+local function fetchUser(name)
+    resultText.Text = "<i>fetching user data...</i>"
+    resultFrame.Visible = true
+    
+    local url = "https://users.roblox.com/v1/usernames/users"
+    local data = {usernames = {name}, excludeBannedUsers = false}
+    local json = httpService:JSONEncode(data)
+    
+    local ok, res = pcall(function()
+        if syn and syn.request then
+            return syn.request({Url = url, Method = "POST", Headers = {["Content-Type"] = "application/json"}, Body = json})
+        elseif request then
+            return request({Url = url, Method = "POST", Headers = {["Content-Type"] = "application/json"}, Body = json})
+        else
+            return nil
+        end
+    end)
+    
+    if not ok or not res then
+        resultText.Text = "<font color='#ff8888'>error: no request function</font>"
+        notify("executor not supported", true)
+        return
+    end
+    
+    if res.StatusCode ~= 200 then
+        resultText.Text = "<font color='#ff8888'>api error: " .. tostring(res.StatusCode) .. "</font>"
+        notify("api request failed", true)
+        return
+    end
+    
+    local decoded = httpService:JSONDecode(res.Body)
+    
+    if not decoded.data or #decoded.data == 0 then
+        resultText.Text = "<font color='#ffaa88'>user not found</font>\n\n\"" .. name .. "\" doesn't exist"
+        notify("user not found", true)
+        return
+    end
+    
+    local user = decoded.data[1]
+    local uid = user.id
+    local uname = user.name
+    local dname = user.displayName or uname
+    
+    local profileOk, profileRes = pcall(function()
+        if syn and syn.request then
+            return syn.request({Url = "https://users.roblox.com/v1/users/" .. uid, Method = "GET"})
+        elseif request then
+            return request({Url = "https://users.roblox.com/v1/users/" .. uid, Method = "GET"})
+        else
+            return nil
+        end
+    end)
+    
+    local desc = "no description"
+    if profileOk and profileRes and profileRes.StatusCode == 200 then
+        local profileData = httpService:JSONDecode(profileRes.Body)
+        desc = profileData.description or "no description"
+        if desc == "" then desc = "no description" end
+    end
+    
+    local presenceOk, presenceRes = pcall(function()
+        local pUrl = "https://presence.roblox.com/v1/presence/users"
+        local pData = {userIds = {uid}}
+        local pJson = httpService:JSONEncode(pData)
+        if syn and syn.request then
+            return syn.request({Url = pUrl, Method = "POST", Headers = {["Content-Type"] = "application/json"}, Body = pJson})
+        elseif request then
+            return request({Url = pUrl, Method = "POST", Headers = {["Content-Type"] = "application/json"}, Body = pJson})
+        else
+            return nil
+        end
+    end)
+    
+    local status = "offline"
+    local color = "#aaaaaa"
+    
+    if presenceOk and presenceRes and presenceRes.StatusCode == 200 then
+        local presenceData = httpService:JSONDecode(presenceRes.Body)
+        if presenceData.userPresences and #presenceData.userPresences > 0 then
+            local p = presenceData.userPresences[1]
+            if p.userPresenceType == 1 then
+                status = "online"
+                color = "#88ff88"
+            elseif p.userPresenceType == 2 then
+                status = "in game"
+                color = "#88ffaa"
+            elseif p.userPresenceType == 3 then
+                status = "in studio"
+                color = "#ffaa88"
+            end
+        end
+    end
+    
+    local shortDesc = desc
+    if #shortDesc > 250 then
+        shortDesc = shortDesc:sub(1, 247) .. "..."
+    end
+    
+    resultText.Text = "<b>» " .. uname .. " (" .. dname .. ")</b>\n\n<font color='#dddddd'>description:</font>\n" .. shortDesc .. "\n\n<font color='#dddddd'>status:</font> <font color='" .. color .. "'>" .. status .. "</font>"
+    notify("loaded: " .. uname, false)
+end
+
+local function checkHttpStatus()
+    httpResult.Text = "<i>checking...</i>"
+    local ok, res = pcall(function()
+        if syn and syn.request then
+            local resp = syn.request({Url = "https://httpbin.org/get", Method = "GET"})
+            return resp.StatusCode == 200
+        elseif request then
+            local resp = request({Url = "https://httpbin.org/get", Method = "GET"})
+            return resp.StatusCode == 200
+        else
+            return nil
+        end
+    end)
+    
+    if ok == nil then
+        httpResult.Text = "<font color='#ff8888'>error: no request function</font>"
+    elseif ok and res then
+        httpResult.Text = "<font color='#88ff88'>http check completed!</font>"
+        notify("http is enabled", false)
+    else
+        httpResult.Text = "<font color='#ff8888'>http is disabled or restricted</font>"
+        notify("http is disabled", true)
+    end
+end
+
+local function updateServerTime()
+    local gameTime = workspace.DistributedGameTime
+    local hrs = math.floor(gameTime / 3600) % 24
+    local mins = math.floor(gameTime / 60) % 60
+    local secs = math.floor(gameTime % 60)
+    local formatted = string.format("%02d:%02d:%02d", hrs, mins, secs)
+    timeText.Text = "<b>server time</b>\n\n" .. formatted .. "\n\n<i>runtime: " .. math.floor(gameTime) .. " seconds</i>"
+end
+
+local function grabCoords()
+    local char = localPlayer.Character
+    if not char then
+        coordResult.Text = "<font color='#ff8888'>error: character not found</font>"
+        notify("character not found", true)
+        return
+    end
+    
+    local root = char:FindFirstChild("HumanoidRootPart")
+    if not root then
+        coordResult.Text = "<font color='#ff8888'>error: root part not found</font>"
+        notify("root part not found", true)
+        return
+    end
+    
+    local pos = root.Position
+    local x = math.floor(pos.X)
+    local y = math.floor(pos.Y)
+    local z = math.floor(pos.Z)
+    
+    currentCoords = x .. " " .. y .. " " .. z
+    coordResult.Text = "<b>coordinates grabbed:</b>\n\nX: " .. x .. "\nY: " .. y .. "\nZ: " .. z
+    copyCoordBtn.Visible = true
+    notify("coordinates grabbed", false)
+end
+
+copyCoordBtn.MouseButton1Click:Connect(function()
+    if currentCoords ~= "" then
+        copyToClip(currentCoords)
+    else
+        notify("no coordinates to copy", true)
+    end
+end)
+
+local function stopFling(teleportBack)
+    if flingActive then
+        flingActive = false
+        if flingLoop then flingLoop:Disconnect() flingLoop = nil end
+        if flingCheck then flingCheck:Disconnect() flingCheck = nil end
+        if charAdded then charAdded:Disconnect() charAdded = nil end
+        if charRemoving then charRemoving:Disconnect() charRemoving = nil end
+        if bodyVel then bodyVel:Destroy() bodyVel = nil end
+        task.wait()
+        if teleportBack and originalPos then
+            local char = localPlayer.Character
+            if char and char:FindFirstChild("HumanoidRootPart") then
+                char.HumanoidRootPart.CFrame = originalPos
+                local hum = char:FindFirstChild("Humanoid")
+                if hum then
+                    hum.PlatformStand = false
+                    local root = char.HumanoidRootPart
+                    root.Velocity = Vector3.new(0, 0, 0)
+                    root.RotVelocity = Vector3.new(0, 0, 0)
+                end
+                notify("teleported back", false)
+            end
+        end
+        flingerStatus.Text = ""
+        originalPos = nil
+        victimStartPos = nil
+    end
+end
+
+local function startFling(targetName)
+    local target = nil
+    for _, plr in pairs(players:GetPlayers()) do
+        if plr.Name:lower() == targetName:lower() then
+            target = plr
+            break
+        end
+    end
+    
+    if not target then
+        flingerStatus.Text = "<font color='#ff8888'>player not found</font>"
+        notify("player not found", true)
+        return
+    end
+    
+    if target == localPlayer then
+        flingerStatus.Text = "<font color='#ff8888'>cant fling yourself</font>"
+        notify("cant fling yourself", true)
+        return
+    end
+    
+    stopFling(false)
+    
+    local myChar = localPlayer.Character
+    if myChar and myChar:FindFirstChild("HumanoidRootPart") then
+        originalPos = myChar.HumanoidRootPart.CFrame
+        local hum = myChar:FindFirstChild("Humanoid")
+        if hum then hum.PlatformStand = true end
+    end
+    
+    local targetChar = target.Character
+    if targetChar and targetChar:FindFirstChild("HumanoidRootPart") then
+        victimStartPos = targetChar.HumanoidRootPart.Position
+    end
+    
+    flingActive = true
+    flingerStatus.Text = "<font color='#88ff88'>preparing...</font>"
+    
+    local myChar2 = localPlayer.Character
+    if myChar2 and myChar2:FindFirstChild("HumanoidRootPart") then
+        myChar2.HumanoidRootPart.CFrame = CFrame.new(safeSpot)
+    end
+    
+    task.wait(0.3)
+    
+    flingerStatus.Text = "<font color='#88ff88'>flinging: " .. target.Name .. "</font>"
+    notify("flinging " .. target.Name, false)
+    
+    local function setupFling(character)
+        if not flingActive then return end
+        if character ~= localPlayer.Character then return end
+        local rootPart = character:FindFirstChild("HumanoidRootPart")
+        if rootPart then
+            if bodyVel then bodyVel:Destroy() end
+            bodyVel = Instance.new("BodyVelocity")
+            bodyVel.MaxForce = Vector3.new(9e9, 9e9, 9e9)
+            bodyVel.Velocity = Vector3.new(200000, 200000, 200000)
+            bodyVel.Parent = rootPart
+            local hum = character:FindFirstChild("Humanoid")
+            if hum then hum.PlatformStand = true end
+        end
+    end
+    
+    charRemoving = localPlayer.CharacterRemoving:Connect(function()
+        if flingActive then stopFling(false) end
+    end)
+    
+    charAdded = localPlayer.CharacterAdded:Connect(function(char)
+        if flingActive then
+            task.wait(0.1)
+            setupFling(char)
+        end
+    end)
+    
+    setupFling(localPlayer.Character)
+    
+    flingLoop = runService.Heartbeat:Connect(function()
+        if not flingActive then return end
+        local targetChar = target.Character
+        local myChar = localPlayer.Character
+        if targetChar and targetChar:FindFirstChild("HumanoidRootPart") and myChar and myChar:FindFirstChild("HumanoidRootPart") then
+            local targetRoot = targetChar.HumanoidRootPart
+            local targetVel = targetRoot.Velocity
+            local speed = targetVel.Magnitude
+            local offset = 3.5
+            
+            if speed > 50 then
+                offset = 8
+            elseif speed > 30 then
+                offset = 6
+            elseif speed > 16 then
+                offset = 4.5
+            end
+            
+            local direction = targetVel.Unit
+            local predictedPos = targetRoot.Position
+            if speed > 1 then
+                predictedPos = targetRoot.Position + (direction * offset)
+            end
+            
+            local myRoot = myChar.HumanoidRootPart
+            myRoot.CFrame = CFrame.new(predictedPos)
+            
+            if bodyVel and bodyVel.Parent then
+                local randomDir = Vector3.new(math.random(-200000, 200000), math.random(50000, 300000), math.random(-200000, 200000))
+                bodyVel.Velocity = randomDir
+            end
+        end
+    end)
+    
+    flingCheck = runService.Heartbeat:Connect(function()
+        if not flingActive then return end
+        local targetChar = target.Character
+        if targetChar and targetChar:FindFirstChild("HumanoidRootPart") and victimStartPos then
+            local currentPos = targetChar.HumanoidRootPart.Position
+            local dist = (currentPos - victimStartPos).Magnitude
+            if dist > 300 then
+                notify(target.Name .. " got flung!", false)
+                stopFling(true)
+            end
+        end
+    end)
+end
+
+local function stopSpawnkill()
+    if spawnkillActive then
+        spawnkillActive = false
+        if spawnkillLoop then spawnkillLoop:Disconnect() spawnkillLoop = nil end
+        if spawnkillTeleportLoop then spawnkillTeleportLoop:Disconnect() spawnkillTeleportLoop = nil end
+        if spawnkillBodyVel then spawnkillBodyVel:Destroy() spawnkillBodyVel = nil end
+        local myChar = localPlayer.Character
+        if myChar and myChar:FindFirstChild("HumanoidRootPart") and spawnkillOriginalPos then
+            myChar.HumanoidRootPart.CFrame = spawnkillOriginalPos
+            local hum = myChar:FindFirstChild("Humanoid")
+            if hum then hum.PlatformStand = false end
+        end
+        spawnkillStatus.Text = ""
+        spawnkillTarget = nil
+        spawnkillOriginalPos = nil
+        spawnkillWaitingForRespawn = false
+        spawnkillInVoid = false
+        notify("spawnkill stopped", false)
+    end
+end
+
+local function startSpawnkill(targetName)
+    local target = nil
+    for _, plr in pairs(players:GetPlayers()) do
+        if plr.Name:lower() == targetName:lower() then
+            target = plr
+            break
+        end
+    end
+    
+    if not target then
+        spawnkillStatus.Text = "<font color='#ff8888'>player not found</font>"
+        notify("player not found", true)
+        return
+    end
+    
+    if target == localPlayer then
+        spawnkillStatus.Text = "<font color='#ff8888'>cant spawnkill yourself</font>"
+        notify("cant spawnkill yourself", true)
+        return
+    end
+    
+    stopSpawnkill()
+    
+    spawnkillActive = true
+    spawnkillTarget = target
+    spawnkillStatus.Text = "<font color='#88ff88'>preparing spawnkill...</font>"
+    
+    local myChar = localPlayer.Character
+    if myChar and myChar:FindFirstChild("HumanoidRootPart") then
+        spawnkillOriginalPos = myChar.HumanoidRootPart.CFrame
+        myChar.HumanoidRootPart.CFrame = CFrame.new(spawnkillSafe)
+        local hum = myChar:FindFirstChild("Humanoid")
+        if hum then hum.PlatformStand = true end
+    end
+    
+    task.wait(4)
+    
+    spawnkillStatus.Text = "<font color='#88ff88'>spawnkilling: " .. target.Name .. "</font>"
+    notify("spawnkilling " .. target.Name, false)
+    
+    local function flingDown(victim)
+        if not spawnkillActive then return end
+        local root = victim:FindFirstChild("HumanoidRootPart")
+        if root then
+            if spawnkillBodyVel then spawnkillBodyVel:Destroy() end
+            spawnkillBodyVel = Instance.new("BodyVelocity")
+            spawnkillBodyVel.MaxForce = Vector3.new(9e9, 9e9, 9e9)
+            spawnkillBodyVel.Velocity = Vector3.new(0, -200000, 0)
+            spawnkillBodyVel.Parent = root
+        end
+    end
+    
+    local function teleportToVictim(victim)
+        local myChar = localPlayer.Character
+        if myChar and myChar:FindFirstChild("HumanoidRootPart") and victim and victim:FindFirstChild("HumanoidRootPart") then
+            local targetRoot = victim.HumanoidRootPart
+            local targetVel = targetRoot.Velocity
+            local speed = targetVel.Magnitude
+            local offset = 3.5
+            
+            if speed > 50 then
+                offset = 8
+            elseif speed > 30 then
+                offset = 6
+            elseif speed > 16 then
+                offset = 4.5
+            end
+            
+            local direction = targetVel.Unit
+            local predictedPos = targetRoot.Position
+            if speed > 1 then
+                predictedPos = targetRoot.Position + (direction * offset)
+            end
+            
+            myChar.HumanoidRootPart.CFrame = CFrame.new(predictedPos)
+        end
+    end
+    
+    local function teleportToSafe()
+        local myChar = localPlayer.Character
+        if myChar and myChar:FindFirstChild("HumanoidRootPart") then
+            myChar.HumanoidRootPart.CFrame = CFrame.new(spawnkillSafe)
+        end
+    end
+    
+    local function teleportToVoidSafe()
+        local myChar = localPlayer.Character
+        if myChar and myChar:FindFirstChild("HumanoidRootPart") then
+            myChar.HumanoidRootPart.CFrame = CFrame.new(spawnkillVoidSafe)
+            if spawnkillBodyVel then spawnkillBodyVel:Destroy() end
+        end
+    end
+    
+    local victimDied = false
+    
+    spawnkillTeleportLoop = runService.Heartbeat:Connect(function()
+        if not spawnkillActive then return end
+        
+        local targetChar = spawnkillTarget.Character
+        local myChar = localPlayer.Character
+        
+        if myChar and myChar:FindFirstChild("HumanoidRootPart") then
+            if myChar.HumanoidRootPart.Position.Y < -500 then
+                if not spawnkillInVoid then
+                    spawnkillInVoid = true
+                    teleportToVoidSafe()
+                    spawnkillStatus.Text = "<font color='#ffaa88'>waiting for respawn...</font>"
+                end
+                return
+            else
+                if spawnkillInVoid then
+                    spawnkillInVoid = false
+                end
+            end
+        end
+        
+        if targetChar and targetChar:FindFirstChild("HumanoidRootPart") then
+            if victimDied then
+                victimDied = false
+                teleportToVictim(targetChar)
+                flingDown(targetChar)
+                spawnkillStatus.Text = "<font color='#88ff88'>spawnkilling: " .. spawnkillTarget.Name .. "</font>"
+            else
+                if myChar and myChar:FindFirstChild("HumanoidRootPart") then
+                    teleportToVictim(targetChar)
+                    flingDown(targetChar)
+                end
+            end
+        else
+            if not victimDied then
+                victimDied = true
+                teleportToSafe()
+                spawnkillStatus.Text = "<font color='#ffaa88'>victim died, waiting for respawn...</font>"
+            end
+        end
+    end)
+end
+
+local function stopAnti(teleportBack)
+    if antiActive then
+        antiActive = false
+        if antiLoop then
+            antiLoop:Disconnect()
+            antiLoop = nil
+        end
+        if teleportBack and antiOriginalPos then
+            local myChar = localPlayer.Character
+            if myChar and myChar:FindFirstChild("HumanoidRootPart") then
+                myChar.HumanoidRootPart.CFrame = antiOriginalPos
+                local hum = myChar:FindFirstChild("Humanoid")
+                if hum then
+                    hum.PlatformStand = false
+                end
+                notify("teleported back to spawn", false)
+            end
+        end
+        antiStatus.Text = "idle"
+        antiStatus.TextColor3 = Color3.fromRGB(150, 150, 150)
+        antiStartBtn.BackgroundColor3 = Color3.fromRGB(70, 100, 70)
+        antiStartBtn.Text = "start the anti"
+        antiOriginalPos = nil
+        antiIndex = 1
+    end
+end
+
+local function startAnti()
+    if antiActive then
+        stopAnti(false)
+        return
+    end
+    
+    local myChar = localPlayer.Character
+    if myChar and myChar:FindFirstChild("HumanoidRootPart") then
+        antiOriginalPos = myChar.HumanoidRootPart.CFrame
+        local hum = myChar:FindFirstChild("Humanoid")
+        if hum then
+            hum.PlatformStand = true
+        end
+    end
+    
+    antiActive = true
+    antiStatus.Text = "active - teleporting"
+    antiStatus.TextColor3 = Color3.fromRGB(100, 200, 100)
+    antiStartBtn.BackgroundColor3 = Color3.fromRGB(100, 70, 70)
+    antiStartBtn.Text = "stop anti"
+    
+    local lastTeleport = tick()
+    antiIndex = 1
+    
+    antiLoop = runService.Heartbeat:Connect(function()
+        if not antiActive then return end
+        
+        local currentTime = tick()
+        if currentTime - lastTeleport >= 0.002 then
+            lastTeleport = currentTime
+            
+            local myChar = localPlayer.Character
+            if myChar and myChar:FindFirstChild("HumanoidRootPart") then
+                myChar.HumanoidRootPart.CFrame = CFrame.new(antiCoords[antiIndex])
+                antiIndex = antiIndex % #antiCoords + 1
+            end
+        end
+    end)
+end
+
+local function stopInvisDesync()
+    if invisDesyncActive then
+        invisDesyncActive = false
+        if invisDesyncLoop then
+            invisDesyncLoop:Disconnect()
+            invisDesyncLoop = nil
+        end
+        local myChar = localPlayer.Character
+        if myChar and myChar:FindFirstChild("HumanoidRootPart") and invisDesyncOriginalPos then
+            myChar.HumanoidRootPart.CFrame = invisDesyncOriginalPos
+            local hum = myChar:FindFirstChild("Humanoid")
+            if hum then
+                hum.PlatformStand = false
+                hum.AutoRotate = true
+            end
+            local root = myChar.HumanoidRootPart
+            root.Velocity = Vector3.new(0, 0, 0)
+            root.RotVelocity = Vector3.new(0, 0, 0)
+        end
+        invisDesyncStatus.Text = "inactive"
+        invisDesyncStatus.TextColor3 = Color3.fromRGB(150, 150, 150)
+        invisDesyncBtn.BackgroundColor3 = Color3.fromRGB(52, 52, 52)
+        invisDesyncBtn.Text = "invis desync"
+        invisDesyncOriginalPos = nil
+        notify("desync stopped", false)
+    end
+end
+
+local function startInvisDesync()
+    if invisDesyncActive then
+        stopInvisDesync()
+        return
+    end
+    
+    local myChar = localPlayer.Character
+    if not myChar or not myChar:FindFirstChild("HumanoidRootPart") then
+        notify("character not found", true)
+        return
+    end
+    
+    local myRoot = myChar.HumanoidRootPart
+    local myHum = myChar:FindFirstChild("Humanoid")
+    
+    invisDesyncOriginalPos = myRoot.CFrame
+    
+    myRoot.CFrame = CFrame.new(invisDesyncFarPos)
+    myRoot.Velocity = Vector3.new(0, 0, 0)
+    myRoot.RotVelocity = Vector3.new(0, 0, 0)
+    
+    if myHum then
+        myHum.PlatformStand = true
+        myHum.AutoRotate = false
+    end
+    
+    invisDesyncActive = true
+    invisDesyncStatus.Text = "active"
+    invisDesyncStatus.TextColor3 = Color3.fromRGB(100, 200, 100)
+    invisDesyncBtn.BackgroundColor3 = Color3.fromRGB(100, 70, 70)
+    invisDesyncBtn.Text = "stop desync"
+    
+    invisDesyncLoop = runService.Heartbeat:Connect(function()
+        if not invisDesyncActive then return end
+        local char = localPlayer.Character
+        if char and char:FindFirstChild("HumanoidRootPart") then
+            local root = char.HumanoidRootPart
+            local hum = char:FindFirstChild("Humanoid")
+            
+            root.CFrame = CFrame.new(invisDesyncFarPos)
+            root.Velocity = Vector3.new(0, 0, 0)
+            root.RotVelocity = Vector3.new(0, 0, 0)
+            
+            if hum then
+                hum.PlatformStand = true
+                hum.AutoRotate = false
+            end
+        end
+    end)
+    
+    notify("desync activated - character frozen at far coordinate", false)
+end
+
+local function clearESP()
+    for _, v in pairs(nameplates) do pcall(function() v:Destroy() end) end
+    nameplates = {}
+    for _, v in pairs(highlights) do pcall(function() v:Destroy() end) end
+    highlights = {}
+    for _, v in pairs(tracers) do pcall(function() v:Remove() end) end
+    tracers = {}
+    for _, v in pairs(skeletons) do
+        if v.lines then
+            for _, line in pairs(v.lines) do pcall(function() line:Remove() end) end
+        end
+    end
+    skeletons = {}
+end
+
+local function makeNameplate(plr)
+    if not plr.Character then return end
+    local bill = Instance.new("BillboardGui")
+    bill.Size = UDim2.new(0, 220, 0, 55)
+    bill.StudsOffset = Vector3.new(0, 2.8, 0)
+    bill.AlwaysOnTop = true
+    bill.Parent = plr.Character
+    local back = Instance.new("Frame")
+    back.Size = UDim2.new(1, 0, 1, 0)
+    back.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+    back.BackgroundTransparency = 0.35
+    back.BorderSizePixel = 0
+    back.Parent = bill
+    local backCorner = Instance.new("UICorner")
+    backCorner.CornerRadius = UDim.new(0, 6)
+    backCorner.Parent = back
+    local name = Instance.new("TextLabel")
+    name.Size = UDim2.new(1, 0, 0.5, 0)
+    name.Position = UDim2.new(0, 0, 0, 4)
+    name.BackgroundTransparency = 1
+    name.Text = plr.Name
+    name.TextColor3 = Color3.fromRGB(255, 255, 255)
+    name.TextSize = 14
+    name.Font = Enum.Font.GothamBold
+    name.TextXAlignment = Enum.TextXAlignment.Center
+    name.Parent = bill
+    local display = Instance.new("TextLabel")
+    display.Size = UDim2.new(1, 0, 0.3, 0)
+    display.Position = UDim2.new(0, 0, 0.5, 0)
+    display.BackgroundTransparency = 1
+    display.Text = plr.DisplayName
+    display.TextColor3 = Color3.fromRGB(170, 170, 170)
+    display.TextSize = 11
+    display.Font = Enum.Font.Gotham
+    display.TextXAlignment = Enum.TextXAlignment.Center
+    display.Parent = bill
+    local distLabel = Instance.new("TextLabel")
+    distLabel.Size = UDim2.new(1, 0, 0.2, 0)
+    distLabel.Position = UDim2.new(0, 0, 0.8, 0)
+    distLabel.BackgroundTransparency = 1
+    distLabel.TextColor3 = Color3.fromRGB(100, 200, 100)
+    distLabel.TextSize = 10
+    distLabel.Font = Enum.Font.Gotham
+    distLabel.TextXAlignment = Enum.TextXAlignment.Center
+    distLabel.Parent = bill
+    local function updateDist()
+        local char = localPlayer.Character
+        if char and char:FindFirstChild("HumanoidRootPart") and plr.Character and plr.Character:FindFirstChild("HumanoidRootPart") then
+            local myPos = char.HumanoidRootPart.Position
+            local theirPos = plr.Character.HumanoidRootPart.Position
+            local dist = (myPos - theirPos).Magnitude
+            if dist > 999999 then
+                distLabel.Text = string.format("%.2e", dist) .. " studs"
+            else
+                distLabel.Text = math.floor(dist) .. " studs"
+            end
+        else
+            distLabel.Text = "???"
+        end
+    end
+    updateDist()
+    local conn
+    conn = runService.RenderStepped:Connect(function()
+        if nameplates[plr] == bill then
+            updateDist()
+        else
+            conn:Disconnect()
+        end
+    end)
+    return bill
+end
+
+local function makeHighlight(plr)
+    if not plr.Character then return end
+    local hl = Instance.new("Highlight")
+    hl.Adornee = plr.Character
+    hl.FillColor = Color3.fromRGB(255, 80, 80)
+    hl.FillTransparency = 0.6
+    hl.OutlineColor = Color3.fromRGB(255, 200, 200)
+    hl.OutlineTransparency = 0.2
+    hl.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+    hl.Parent = plr.Character
+    return hl
+end
+
+local function makeTracer(plr)
+    local line = Drawing.new("Line")
+    line.Visible = false
+    line.Color = Color3.fromRGB(255, 80, 80)
+    line.Thickness = 2
+    tracers[plr] = line
+end
+
+local function makeSkeleton(plr)
+    local lines = {}
+    for _, conn in pairs(skeletonParts) do
+        local line = Drawing.new("Line")
+        line.Visible = false
+        line.Color = Color3.fromRGB(80, 200, 80)
+        line.Thickness = 2
+        table.insert(lines, {line = line, from = conn[1], to = conn[2]})
+    end
+    skeletons[plr] = {lines = lines, char = plr.Character}
+end
+
+local function updateTracers()
+    for plr, line in pairs(tracers) do
+        if plr.Character and plr.Character:FindFirstChild("HumanoidRootPart") then
+            local pos, onScreen = camera:WorldToViewportPoint(plr.Character.HumanoidRootPart.Position)
+            if onScreen then
+                line.From = Vector2.new(camera.ViewportSize.X / 2, camera.ViewportSize.Y)
+                line.To = Vector2.new(pos.X, pos.Y)
+                line.Visible = true
+            else
+                line.Visible = false
+            end
+        else
+            line.Visible = false
+        end
+    end
+end
+
+local function updateSkeletons()
+    for plr, data in pairs(skeletons) do
+        local char = plr.Character
+        if char then
+            for _, lineData in pairs(data.lines) do
+                local part1 = char:FindFirstChild(lineData.from)
+                local part2 = char:FindFirstChild(lineData.to)
+                if part1 and part2 then
+                    local pos1, on1 = camera:WorldToViewportPoint(part1.Position)
+                    local pos2, on2 = camera:WorldToViewportPoint(part2.Position)
+                    if on1 and on2 then
+                        lineData.line.From = Vector2.new(pos1.X, pos1.Y)
+                        lineData.line.To = Vector2.new(pos2.X, pos2.Y)
+                        lineData.line.Visible = true
+                    else
+                        lineData.line.Visible = false
+                    end
+                else
+                    lineData.line.Visible = false
+                end
+            end
+        else
+            for _, lineData in pairs(data.lines) do
+                lineData.line.Visible = false
+            end
+        end
+    end
+end
+
+local function refreshESP()
+    if not espActive then return end
+    for _, plr in pairs(players:GetPlayers()) do
+        if plr ~= localPlayer then
+            if nameplatesActive then
+                if not nameplates[plr] then
+                    local np = makeNameplate(plr)
+                    if np then nameplates[plr] = np end
+                end
+            else
+                if nameplates[plr] then
+                    pcall(function() nameplates[plr]:Destroy() end)
+                    nameplates[plr] = nil
+                end
+            end
+            if highlightsActive then
+                if not highlights[plr] then
+                    local hl = makeHighlight(plr)
+                    if hl then highlights[plr] = hl end
+                end
+            else
+                if highlights[plr] then
+                    pcall(function() highlights[plr]:Destroy() end)
+                    highlights[plr] = nil
+                end
+            end
+            if tracersActive then
+                if not tracers[plr] then
+                    makeTracer(plr)
+                end
+            else
+                if tracers[plr] then
+                    pcall(function() tracers[plr]:Remove() end)
+                    tracers[plr] = nil
+                end
+            end
+            if skeletonActive then
+                if not skeletons[plr] then
+                    makeSkeleton(plr)
+                end
+            else
+                if skeletons[plr] then
+                    for _, lineData in pairs(skeletons[plr].lines) do
+                        pcall(function() lineData.line:Remove() end)
+                    end
+                    skeletons[plr] = nil
+                end
+            end
+        end
+    end
+end
+
+local function espUpdate()
+    if not espActive then return end
+    refreshESP()
+    if tracersActive then updateTracers() end
+    if skeletonActive then updateSkeletons() end
+end
+
+local function toggleMasterESP()
+    espActive = not espActive
+    if espActive then
+        espMasterBtn.Text = "disable esp"
+        espMasterBtn.BackgroundColor3 = Color3.fromRGB(100, 70, 70)
+        espStatus.Text = "enabled"
+        espStatus.TextColor3 = Color3.fromRGB(100, 200, 100)
+        refreshESP()
+        if not espLoop then
+            espLoop = runService.RenderStepped:Connect(espUpdate)
+        end
+        if not playerAddedConn then
+            playerAddedConn = players.PlayerAdded:Connect(function()
+                if espActive then
+                    task.wait(0.2)
+                    refreshESP()
+                end
+            end)
+        end
+        if not playerRemovingConn then
+            playerRemovingConn = players.PlayerRemoving:Connect(function(plr)
+                if nameplates[plr] then pcall(function() nameplates[plr]:Destroy() end) nameplates[plr] = nil end
+                if highlights[plr] then pcall(function() highlights[plr]:Destroy() end) highlights[plr] = nil end
+                if tracers[plr] then pcall(function() tracers[plr]:Remove() end) tracers[plr] = nil end
+                if skeletons[plr] then
+                    for _, lineData in pairs(skeletons[plr].lines) do pcall(function() lineData.line:Remove() end) end
+                    skeletons[plr] = nil
+                end
+            end)
+        end
+    else
+        espMasterBtn.Text = "enable esp"
+        espMasterBtn.BackgroundColor3 = Color3.fromRGB(70, 100, 70)
+        espStatus.Text = "disabled"
+        espStatus.TextColor3 = Color3.fromRGB(150, 150, 150)
+        clearESP()
+        if espLoop then
+            espLoop:Disconnect()
+            espLoop = nil
+        end
+        if playerAddedConn then
+            playerAddedConn:Disconnect()
+            playerAddedConn = nil
+        end
+        if playerRemovingConn then
+            playerRemovingConn:Disconnect()
+            playerRemovingConn = nil
+        end
+    end
+end
+
+local function updateButtonStyle(btn, state, label)
+    if state then
+        btn.Text = label .. " on"
+        btn.BackgroundColor3 = Color3.fromRGB(70, 100, 70)
+    else
+        btn.Text = label
+        btn.BackgroundColor3 = Color3.fromRGB(52, 52, 52)
+    end
+end
+
+nameplateBtn.MouseButton1Click:Connect(function()
+    nameplatesActive = not nameplatesActive
+    updateButtonStyle(nameplateBtn, nameplatesActive, "nameplates")
+    if espActive then refreshESP() end
+end)
+
+highlightBtn.MouseButton1Click:Connect(function()
+    highlightsActive = not highlightsActive
+    updateButtonStyle(highlightBtn, highlightsActive, "highlight")
+    if espActive then refreshESP() end
+end)
+
+tracerBtn.MouseButton1Click:Connect(function()
+    tracersActive = not tracersActive
+    updateButtonStyle(tracerBtn, tracersActive, "tracers")
+    if espActive then
+        if not tracersActive then
+            for _, line in pairs(tracers) do pcall(function() line:Remove() end) end
+            tracers = {}
+        else
+            refreshESP()
+        end
+    end
+end)
+
+skeletonBtn.MouseButton1Click:Connect(function()
+    skeletonActive = not skeletonActive
+    updateButtonStyle(skeletonBtn, skeletonActive, "skeleton")
+    if espActive then
+        if not skeletonActive then
+            for _, data in pairs(skeletons) do
+                for _, lineData in pairs(data.lines) do pcall(function() lineData.line:Remove() end) end
+            end
+            skeletons = {}
+        else
+            refreshESP()
+        end
+    end
+end)
+
+espMasterBtn.MouseButton1Click:Connect(function()
+    toggleMasterESP()
+end)
+
+nameplateBtn.MouseEnter:Connect(function()
+    nameplateBtn.BackgroundColor3 = Color3.fromRGB(75, 75, 75)
+end)
+nameplateBtn.MouseLeave:Connect(function()
+    if nameplatesActive then nameplateBtn.BackgroundColor3 = Color3.fromRGB(70, 100, 70) else nameplateBtn.BackgroundColor3 = Color3.fromRGB(52, 52, 52) end
+end)
+
+highlightBtn.MouseEnter:Connect(function()
+    highlightBtn.BackgroundColor3 = Color3.fromRGB(75, 75, 75)
+end)
+highlightBtn.MouseLeave:Connect(function()
+    if highlightsActive then highlightBtn.BackgroundColor3 = Color3.fromRGB(70, 100, 70) else highlightBtn.BackgroundColor3 = Color3.fromRGB(52, 52, 52) end
+end)
+
+tracerBtn.MouseEnter:Connect(function()
+    tracerBtn.BackgroundColor3 = Color3.fromRGB(75, 75, 75)
+end)
+tracerBtn.MouseLeave:Connect(function()
+    if tracersActive then tracerBtn.BackgroundColor3 = Color3.fromRGB(70, 100, 70) else tracerBtn.BackgroundColor3 = Color3.fromRGB(52, 52, 52) end
+end)
+
+skeletonBtn.MouseEnter:Connect(function()
+    skeletonBtn.BackgroundColor3 = Color3.fromRGB(75, 75, 75)
+end)
+skeletonBtn.MouseLeave:Connect(function()
+    if skeletonActive then skeletonBtn.BackgroundColor3 = Color3.fromRGB(70, 100, 70) else skeletonBtn.BackgroundColor3 = Color3.fromRGB(52, 52, 52) end
+end)
+
+espMasterBtn.MouseEnter:Connect(function()
+    espMasterBtn.BackgroundColor3 = Color3.fromRGB(90, 90, 90)
+end)
+espMasterBtn.MouseLeave:Connect(function()
+    if espActive then espMasterBtn.BackgroundColor3 = Color3.fromRGB(100, 70, 70) else espMasterBtn.BackgroundColor3 = Color3.fromRGB(70, 100, 70) end
+end)
+
+userCheckBtn.MouseButton1Click:Connect(function()
+    displayContainer.Visible = false
+    inputFrame.Visible = true
+    resultFrame.Visible = false
+    httpFrame.Visible = false
+    timeFrame.Visible = false
+    coordFrame.Visible = false
+    flingerFrame.Visible = false
+    spawnkillFrame.Visible = false
+    espFrame.Visible = false
+    antiFrame.Visible = false
+    desyncFrame.Visible = false
+    usernameBox.Text = ""
+    resultText.Text = ""
+end)
+
+executeBtn.MouseButton1Click:Connect(function()
+    local name = usernameBox.Text
+    if name == "" or name:match("^%s*$") then
+        notify("enter a username", true)
+        return
+    end
+    fetchUser(name)
+end)
+
+httpCheckBtn.MouseButton1Click:Connect(function()
+    displayContainer.Visible = false
+    inputFrame.Visible = false
+    resultFrame.Visible = false
+    httpFrame.Visible = true
+    timeFrame.Visible = false
+    coordFrame.Visible = false
+    flingerFrame.Visible = false
+    spawnkillFrame.Visible = false
+    espFrame.Visible = false
+    antiFrame.Visible = false
+    desyncFrame.Visible = false
+    httpResult.Text = ""
+end)
+
+checkHttpBtn.MouseButton1Click:Connect(function()
+    checkHttpStatus()
+end)
+
+serverTimeBtn.MouseButton1Click:Connect(function()
+    displayContainer.Visible = false
+    inputFrame.Visible = false
+    resultFrame.Visible = false
+    httpFrame.Visible = false
+    timeFrame.Visible = true
+    coordFrame.Visible = false
+    flingerFrame.Visible = false
+    spawnkillFrame.Visible = false
+    espFrame.Visible = false
+    antiFrame.Visible = false
+    desyncFrame.Visible = false
+    updateServerTime()
+    local conn
+    conn = runService.Heartbeat:Connect(function()
+        if timeFrame.Visible then
+            updateServerTime()
+        else
+            conn:Disconnect()
+        end
+    end)
+end)
+
+coordGrabBtn.MouseButton1Click:Connect(function()
+    displayContainer.Visible = false
+    inputFrame.Visible = false
+    resultFrame.Visible = false
+    httpFrame.Visible = false
+    timeFrame.Visible = false
+    coordFrame.Visible = true
+    flingerFrame.Visible = false
+    spawnkillFrame.Visible = false
+    espFrame.Visible = false
+    antiFrame.Visible = false
+    desyncFrame.Visible = false
+    coordResult.Text = ""
+    copyCoordBtn.Visible = false
+    currentCoords = ""
+end)
+
+grabCoordBtn.MouseButton1Click:Connect(function()
+    grabCoords()
+end)
+
+flingerBtn.MouseButton1Click:Connect(function()
+    displayContainer.Visible = false
+    inputFrame.Visible = false
+    resultFrame.Visible = false
+    httpFrame.Visible = false
+    timeFrame.Visible = false
+    coordFrame.Visible = false
+    flingerFrame.Visible = true
+    spawnkillFrame.Visible = false
+    espFrame.Visible = false
+    antiFrame.Visible = false
+    desyncFrame.Visible = false
+    flingerStatus.Text = ""
+    flingerUserBox.Text = ""
+end)
+
+flingerExecBtn.MouseButton1Click:Connect(function()
+    local name = flingerUserBox.Text
+    if name == "" or name:match("^%s*$") then
+        notify("enter a username", true)
+        return
+    end
+    startFling(name)
+end)
+
+stopFlingBtn.MouseButton1Click:Connect(function()
+    stopFling(false)
+end)
+
+spawnkillBtn.MouseButton1Click:Connect(function()
+    displayContainer.Visible = false
+    inputFrame.Visible = false
+    resultFrame.Visible = false
+    httpFrame.Visible = false
+    timeFrame.Visible = false
+    coordFrame.Visible = false
+    flingerFrame.Visible = false
+    spawnkillFrame.Visible = true
+    espFrame.Visible = false
+    antiFrame.Visible = false
+    desyncFrame.Visible = false
+    spawnkillStatus.Text = ""
+    spawnkillUserBox.Text = ""
+end)
+
+spawnkillExecBtn.MouseButton1Click:Connect(function()
+    local name = spawnkillUserBox.Text
+    if name == "" or name:match("^%s*$") then
+        notify("enter a username", true)
+        return
+    end
+    startSpawnkill(name)
+end)
+
+stopSpawnkillBtn.MouseButton1Click:Connect(function()
+    stopSpawnkill()
+end)
+
+espBtn.MouseButton1Click:Connect(function()
+    displayContainer.Visible = false
+    inputFrame.Visible = false
+    resultFrame.Visible = false
+    httpFrame.Visible = false
+    timeFrame.Visible = false
+    coordFrame.Visible = false
+    flingerFrame.Visible = false
+    spawnkillFrame.Visible = false
+    espFrame.Visible = true
+    antiFrame.Visible = false
+    desyncFrame.Visible = false
+end)
+
+antiBtn.MouseButton1Click:Connect(function()
+    displayContainer.Visible = false
+    inputFrame.Visible = false
+    resultFrame.Visible = false
+    httpFrame.Visible = false
+    timeFrame.Visible = false
+    coordFrame.Visible = false
+    flingerFrame.Visible = false
+    spawnkillFrame.Visible = false
+    espFrame.Visible = false
+    antiFrame.Visible = true
+    desyncFrame.Visible = false
+end)
+
+desyncTabBtn.MouseButton1Click:Connect(function()
+    displayContainer.Visible = false
+    inputFrame.Visible = false
+    resultFrame.Visible = false
+    httpFrame.Visible = false
+    timeFrame.Visible = false
+    coordFrame.Visible = false
+    flingerFrame.Visible = false
+    spawnkillFrame.Visible = false
+    espFrame.Visible = false
+    antiFrame.Visible = false
+    desyncFrame.Visible = true
+end)
+
+antiStartBtn.MouseButton1Click:Connect(function()
+    if antiActive then
+        stopAnti(false)
+    else
+        startAnti()
+    end
+end)
+
+antiStopBtn.MouseButton1Click:Connect(function()
+    stopAnti(true)
+end)
+
+invisDesyncBtn.MouseButton1Click:Connect(function()
+    if invisDesyncActive then
+        stopInvisDesync()
+    else
+        startInvisDesync()
+    end
+end)
+
+closeBtn.MouseButton1Click:Connect(function()
+    screenGui.Enabled = false
+end)
+
+userInputService.InputBegan:Connect(function(input, gameProcessed)
+    if gameProcessed then return end
+    if input.KeyCode == Enum.KeyCode.P then
+        screenGui.Enabled = not screenGui.Enabled
+        if screenGui.Enabled then
+            local fadeTween = tweenService:Create(mainContainer, TweenInfo.new(0.3, Enum.EasingStyle.Quad), {BackgroundTransparency = 0})
+            fadeTween:Play()
+            notify("press P to close", false)
+        else
+            notify("press P to open", false)
+        end
+    end
+end)
+
+userCheckBtn.MouseEnter:Connect(function()
+    userCheckBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+end)
+userCheckBtn.MouseLeave:Connect(function()
+    userCheckBtn.BackgroundColor3 = Color3.fromRGB(52, 52, 52)
+end)
+
+httpCheckBtn.MouseEnter:Connect(function()
+    httpCheckBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+end)
+httpCheckBtn.MouseLeave:Connect(function()
+    httpCheckBtn.BackgroundColor3 = Color3.fromRGB(52, 52, 52)
+end)
+
+serverTimeBtn.MouseEnter:Connect(function()
+    serverTimeBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+end)
+serverTimeBtn.MouseLeave:Connect(function()
+    serverTimeBtn.BackgroundColor3 = Color3.fromRGB(52, 52, 52)
+end)
+
+coordGrabBtn.MouseEnter:Connect(function()
+    coordGrabBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+end)
+coordGrabBtn.MouseLeave:Connect(function()
+    coordGrabBtn.BackgroundColor3 = Color3.fromRGB(52, 52, 52)
+end)
+
+flingerBtn.MouseEnter:Connect(function()
+    flingerBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+end)
+flingerBtn.MouseLeave:Connect(function()
+    flingerBtn.BackgroundColor3 = Color3.fromRGB(52, 52, 52)
+end)
+
+spawnkillBtn.MouseEnter:Connect(function()
+    spawnkillBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+end)
+spawnkillBtn.MouseLeave:Connect(function()
+    spawnkillBtn.BackgroundColor3 = Color3.fromRGB(52, 52, 52)
+end)
+
+espBtn.MouseEnter:Connect(function()
+    espBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+end)
+espBtn.MouseLeave:Connect(function()
+    espBtn.BackgroundColor3 = Color3.fromRGB(52, 52, 52)
+end)
+
+antiBtn.MouseEnter:Connect(function()
+    antiBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+end)
+antiBtn.MouseLeave:Connect(function()
+    antiBtn.BackgroundColor3 = Color3.fromRGB(52, 52, 52)
+end)
+
+desyncTabBtn.MouseEnter:Connect(function()
+    desyncTabBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+end)
+desyncTabBtn.MouseLeave:Connect(function()
+    desyncTabBtn.BackgroundColor3 = Color3.fromRGB(52, 52, 52)
+end)
+
+grabCoordBtn.MouseEnter:Connect(function()
+    grabCoordBtn.BackgroundColor3 = Color3.fromRGB(90, 90, 90)
+end)
+grabCoordBtn.MouseLeave:Connect(function()
+    grabCoordBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+end)
+
+copyCoordBtn.MouseEnter:Connect(function()
+    copyCoordBtn.BackgroundColor3 = Color3.fromRGB(90, 90, 90)
+end)
+copyCoordBtn.MouseLeave:Connect(function()
+    copyCoordBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+end)
+
+flingerExecBtn.MouseEnter:Connect(function()
+    flingerExecBtn.BackgroundColor3 = Color3.fromRGB(90, 90, 90)
+end)
+flingerExecBtn.MouseLeave:Connect(function()
+    flingerExecBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+end)
+
+stopFlingBtn.MouseEnter:Connect(function()
+    stopFlingBtn.BackgroundColor3 = Color3.fromRGB(90, 90, 90)
+end)
+stopFlingBtn.MouseLeave:Connect(function()
+    stopFlingBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+end)
+
+spawnkillExecBtn.MouseEnter:Connect(function()
+    spawnkillExecBtn.BackgroundColor3 = Color3.fromRGB(90, 90, 90)
+end)
+spawnkillExecBtn.MouseLeave:Connect(function()
+    spawnkillExecBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+end)
+
+stopSpawnkillBtn.MouseEnter:Connect(function()
+    stopSpawnkillBtn.BackgroundColor3 = Color3.fromRGB(90, 90, 90)
+end)
+stopSpawnkillBtn.MouseLeave:Connect(function()
+    stopSpawnkillBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+end)
+
+antiStartBtn.MouseEnter:Connect(function()
+    if antiActive then
+        antiStartBtn.BackgroundColor3 = Color3.fromRGB(120, 90, 90)
+    else
+        antiStartBtn.BackgroundColor3 = Color3.fromRGB(90, 120, 90)
+    end
+end)
+
+antiStartBtn.MouseLeave:Connect(function()
+    if antiActive then
+        antiStartBtn.BackgroundColor3 = Color3.fromRGB(100, 70, 70)
+    else
+        antiStartBtn.BackgroundColor3 = Color3.fromRGB(70, 100, 70)
+    end
+end)
+
+antiStopBtn.MouseEnter:Connect(function()
+    antiStopBtn.BackgroundColor3 = Color3.fromRGB(90, 90, 90)
+end)
+
+antiStopBtn.MouseLeave:Connect(function()
+    antiStopBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+end)
+
+invisDesyncBtn.MouseEnter:Connect(function()
+    invisDesyncBtn.BackgroundColor3 = Color3.fromRGB(90, 90, 90)
+end)
+
+invisDesyncBtn.MouseLeave:Connect(function()
+    if invisDesyncActive then
+        invisDesyncBtn.BackgroundColor3 = Color3.fromRGB(100, 70, 70)
+    else
+        invisDesyncBtn.BackgroundColor3 = Color3.fromRGB(70, 100, 70)
+    end
+end)
+
+closeBtn.MouseEnter:Connect(function()
+    closeBtn.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+end)
+closeBtn.MouseLeave:Connect(function()
+    closeBtn.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+end)
+
+displayContainer.Visible = true
+inputFrame.Visible = false
+resultFrame.Visible = false
+httpFrame.Visible = false
+timeFrame.Visible = false
+coordFrame.Visible = false
+flingerFrame.Visible = false
+spawnkillFrame.Visible = false
+espFrame.Visible = false
+antiFrame.Visible = false
+desyncFrame.Visible = false
+
+local fadeTween = tweenService:Create(mainContainer, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundTransparency = 0})
+screenGui.Enabled = true
+fadeTween:Play()
+
+notify("press P to open/close", false)
